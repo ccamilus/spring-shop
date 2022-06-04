@@ -16,12 +16,12 @@ public class User {
             strategy = GenerationType.SEQUENCE,
             generator = "user_sequence"
     )
-    private Integer id;
+    private int id;
     private String username;
     private String password;
     private String firstName;
     private String lastName;
-    private Integer telephone;
+    private int telephone;
     private Timestamp createdAt;
     private Timestamp modifiedAt;
     private String email;
@@ -29,7 +29,7 @@ public class User {
     public User(){
     }
 
-    public User(Integer id, String username, String password, String firstName, String lastName, Integer telephone, Timestamp createdAt, Timestamp modifiedAt, String email) {
+    public User(int id, String username, String password, String firstName, String lastName, int telephone, Timestamp createdAt, Timestamp modifiedAt, String email) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -41,7 +41,7 @@ public class User {
         this.email = email;
     }
 
-    public User(String username, String password, String firstName, String lastName, Integer telephone, Timestamp createdAt, Timestamp modifiedAt, String email) {
+    public User(String username, String password, String firstName, String lastName, int telephone, Timestamp createdAt, Timestamp modifiedAt, String email) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -52,11 +52,11 @@ public class User {
         this.email = email;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -92,11 +92,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Integer getTelephone() {
+    public int getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(Integer telephone) {
+    public void setTelephone(int telephone) {
         this.telephone = telephone;
     }
 
