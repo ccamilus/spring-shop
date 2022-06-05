@@ -16,11 +16,11 @@ public class SpringShopApplication {
     }
 
     //Test EmailSender
-    @EventListener(ApplicationReadyEvent.class)
-    public void sendEmail() {
-        senderService.sendEmail("kobielarz.t@gmail.com",
-                "Test subject",
-                "Test body");
-    }
+//     @EventListener(ApplicationReadyEvent.class)
+//     public void sendEmail() {
+//         senderService.sendEmail("kobielarz.t@gmail.com",
+//                 "Test subject",
+//                 "Test body");
+//     }
 
 }
