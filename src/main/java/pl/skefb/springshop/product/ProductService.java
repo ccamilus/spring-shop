@@ -24,6 +24,8 @@ public class ProductService {
         return this.productRepository.findById(productId);
     }
 
+    // TODO : create get product by category
+
     public void addProduct(Product product) {
         this.productRepository.save(product);
     }
