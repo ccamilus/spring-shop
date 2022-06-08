@@ -34,19 +34,23 @@ public class Product {
     @JoinColumn(name = "category_id")
     private ProductCategory productCategory;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "inventory_id")
     private ProductInventory productInventory;
 
     // TODO : add 3 more attrs of TIMESTAMP and update below constructor
 
-    public Product(String name, String description
-                    , String SKU, double price
-                    , ProductCategory productCategory) {
+    // TODO : add availability to passing Integer QUANTITY to replace productInventory, create PI inside constructor and delete from DB inside destructor
+
+    public Product(String name, String description,
+                   String SKU, double price,
+                   ProductCategory productCategory,
+                   ProductInventory productInventory) {
         this.name = name;
         this.description = description;
         this.SKU = SKU;
         this.price = price;
         this.productCategory = productCategory;
+        this.productInventory = productInventory;
     }
 }

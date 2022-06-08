@@ -24,11 +24,11 @@ public class ProductInventory {
     private Integer id;
     private Integer quantity;
 
-    @OneToMany(
+    @OneToOne(
             mappedBy = "productInventory",
             cascade = CascadeType.ALL
     )
-    private List<Product> products = new ArrayList<>();
+    private Product product;
 
     // TODO : add 3 more attrs of TIMESTAMP and update below constructor
 
