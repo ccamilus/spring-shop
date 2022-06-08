@@ -35,11 +35,8 @@ public class ProductService {
     public void deleteProductById(Integer productId) {
         boolean notExist = ! this.productRepository.existsById(productId);
 
-        if ( notExist ) {
-            throw new IllegalStateException(
-                    "product with " + productId + " id, does not exists! "
-            );
-        }
+        if ( notExist )
+            throw new IllegalStateException("product does not exists!");
 
         this.productRepository.deleteById(productId);
     }

@@ -26,11 +26,8 @@ public class ProductInventoryService {
     public void deleteInventoryById(Integer inventoryId) {
         boolean notExist = ! this.productInventoryRepository.existsById(inventoryId);
 
-        if ( notExist ) {
-            throw new IllegalStateException(
-                    "Given inventory id does not exists!"
-            );
-        }
+        if ( notExist )
+            throw new IllegalStateException("Inventory id does not exists!");
 
         this.productInventoryRepository.deleteById(inventoryId);
     }

@@ -37,11 +37,8 @@ public class ProductCategoryService {
     public void deleteCategory(Integer categoryId ) {
         boolean notExist = ! this.productCategoryRepository.existsById(categoryId);
 
-        if ( notExist ) {
-            throw new IllegalStateException(
-                    "Given category does not exist!"
-            );
-        }
+        if ( notExist )
+            throw new IllegalStateException("Category does not exist!");
 
         this.productCategoryRepository.deleteById(categoryId);
     }

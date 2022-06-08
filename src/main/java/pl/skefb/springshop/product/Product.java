@@ -1,10 +1,13 @@
 package pl.skefb.springshop.product;
 
 import lombok.*;
+import pl.skefb.springshop.order_item.OrderItems;
 import pl.skefb.springshop.product_category.ProductCategory;
 import pl.skefb.springshop.product_inventory.ProductInventory;
 
 import javax.persistence.*;
+
+// TODO : apply validation
 
 @Entity
 @Table
@@ -37,6 +40,12 @@ public class Product {
     @OneToOne
     @JoinColumn(name = "inventory_id")
     private ProductInventory productInventory;
+
+    @OneToOne(
+            mappedBy = "product",
+            cascade = CascadeType.ALL
+    )
+    private OrderItems orderItems;
 
     // TODO : add 3 more attrs of TIMESTAMP and update below constructor
 
