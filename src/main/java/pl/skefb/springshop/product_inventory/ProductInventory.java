@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "product_inventory")
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @ToString
+@Getter @Setter @AllArgsConstructor @ToString
 public class ProductInventory {
     @Id
     @SequenceGenerator(
@@ -31,6 +31,11 @@ public class ProductInventory {
     private Product product;
 
     // TODO : add 3 more attrs of TIMESTAMP and update below constructor
+
+
+    public ProductInventory() {
+        this.quantity = 0;
+    }
 
     public ProductInventory(Integer quantity) {
         this.quantity = quantity;

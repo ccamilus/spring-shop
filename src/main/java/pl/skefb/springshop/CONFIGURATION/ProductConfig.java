@@ -16,7 +16,7 @@ import java.util.List;
 public class ProductConfig {
 
     @Bean
-    CommandLineRunner commandLineRunner(
+    CommandLineRunner CLRproduct(
             ProductRepository product,
             ProductCategoryRepository category,
             ProductInventoryRepository inventory
