@@ -1,5 +1,8 @@
 package pl.skefb.springshop.shopping_session;
 
+import pl.skefb.springshop.product.Product;
+import pl.skefb.springshop.user.User;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -17,8 +20,11 @@ public class ShoppingSession {
             strategy = GenerationType.SEQUENCE,
             generator = "shopping_session_sequence"
     )
-    private int id;
-    private int userId;
+    private Integer id;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     private BigDecimal total;
     private Timestamp createdAt;
     private Timestamp modifiedAt;
@@ -26,35 +32,25 @@ public class ShoppingSession {
     public ShoppingSession() {
     }
 
-    public ShoppingSession(int id, int userId, BigDecimal total, Timestamp createdAt, Timestamp modifiedAt) {
+    public ShoppingSession(Integer id, BigDecimal total, Timestamp createdAt, Timestamp modifiedAt) {
         this.id = id;
-        this.userId = userId;
         this.total = total;
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
     }
 
-    public ShoppingSession(int userId, BigDecimal total, Timestamp createdAt, Timestamp modifiedAt) {
-        this.userId = userId;
+    public ShoppingSession(BigDecimal total, Timestamp createdAt, Timestamp modifiedAt) {
         this.total = total;
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public BigDecimal getTotal() {
@@ -85,7 +81,6 @@ public class ShoppingSession {
     public String toString() {
         return "ShoppingSession{" +
                 "id=" + id +
-                ", userId=" + userId +
                 ", total=" + total +
                 ", createdAt=" + createdAt +
                 ", modifiedAt=" + modifiedAt +

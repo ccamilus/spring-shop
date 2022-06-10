@@ -8,20 +8,22 @@ import java.sql.Timestamp;
 public class User {
     @Id
     @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
+            name = "shop_user_sequence",
+            sequenceName = "shop_user_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "user_sequence"
+            generator = "shop_user_sequence"
     )
-    private int id;
+    private Integer id;
     private String username;
+
+    @Column(columnDefinition = "TEXT")
     private String password;
     private String firstName;
     private String lastName;
-    private int telephone;
+    private Integer telephone;
     private Timestamp createdAt;
     private Timestamp modifiedAt;
     private String email;
@@ -29,7 +31,7 @@ public class User {
     public User(){
     }
 
-    public User(int id, String username, String password, String firstName, String lastName, int telephone, Timestamp createdAt, Timestamp modifiedAt, String email) {
+    public User(Integer id, String username, String password, String firstName, String lastName, Integer telephone, Timestamp createdAt, Timestamp modifiedAt, String email) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -41,7 +43,7 @@ public class User {
         this.email = email;
     }
 
-    public User(String username, String password, String firstName, String lastName, int telephone, Timestamp createdAt, Timestamp modifiedAt, String email) {
+    public User(String username, String password, String firstName, String lastName, Integer telephone, Timestamp createdAt, Timestamp modifiedAt, String email) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -52,11 +54,11 @@ public class User {
         this.email = email;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -92,11 +94,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public int getTelephone() {
+    public Integer getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(int telephone) {
+    public void setTelephone(Integer telephone) {
         this.telephone = telephone;
     }
 

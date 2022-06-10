@@ -1,10 +1,12 @@
 package pl.skefb.springshop.shop_user_address;
 
+import pl.skefb.springshop.user.User;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "shop_user")
+@Table(name = "shop_user_address")
 public class ShopUserAddress {
     @Id
     @SequenceGenerator(
@@ -16,8 +18,11 @@ public class ShopUserAddress {
             strategy = GenerationType.SEQUENCE,
             generator = "shop_user_address_sequence"
     )
-    private int id;
-    private int userId;
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     private String addressLine1;
     private String addressLine2;
     private String city;
@@ -26,9 +31,8 @@ public class ShopUserAddress {
     private String telephone;
     private String mobilePhone;
 
-    public ShopUserAddress(int id, int userId, String addressLine1, String addressLine2, String city, String postalCode, String country, String telephone, String mobilePhone) {
+    public ShopUserAddress(Integer id, String addressLine1, String addressLine2, String city, String postalCode, String country, String telephone, String mobilePhone) {
         this.id = id;
-        this.userId = userId;
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2;
         this.city = city;
@@ -38,8 +42,7 @@ public class ShopUserAddress {
         this.mobilePhone = mobilePhone;
     }
 
-    public ShopUserAddress(int userId, String addressLine1, String addressLine2, String city, String postalCode, String country, String telephone, String mobilePhone) {
-        this.userId = userId;
+    public ShopUserAddress(String addressLine1, String addressLine2, String city, String postalCode, String country, String telephone, String mobilePhone) {
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2;
         this.city = city;
@@ -52,20 +55,12 @@ public class ShopUserAddress {
     public ShopUserAddress() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getAddressLine1() {

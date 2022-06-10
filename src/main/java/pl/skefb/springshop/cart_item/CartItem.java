@@ -1,6 +1,10 @@
 package pl.skefb.springshop.cart_item;
 
 
+import pl.skefb.springshop.product.Product;
+import pl.skefb.springshop.shopping_session.ShoppingSession;
+import pl.skefb.springshop.user.User;
+
 import javax.persistence.*;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -10,71 +14,58 @@ import java.sql.Timestamp;
 public class CartItem {
     @Id
     @SequenceGenerator(
-            name = "cart_tem_sequence",
-            sequenceName = "cart_tem_sequence",
+            name = "cart_item_sequence",
+            sequenceName = "cart_item_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "cart_tem_sequence"
+            generator = "cart_item_sequence"
     )
-    private int id;
-    private int sessionId;
-    private int productId;
-    private int qantity;
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "session_id")
+    private ShoppingSession shoppingSession;
+
+    @OneToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+    private Integer quantity;
     private Timestamp createdAt;
     private Timestamp modifiedAt;
 
     public CartItem() {
     }
 
-    public CartItem(int id, int sessionId, int productId, int qantity, Timestamp createdAt, Timestamp modifiedAt) {
+    public CartItem(Integer id, Integer quantity, Timestamp createdAt, Timestamp modifiedAt) {
         this.id = id;
-        this.sessionId = sessionId;
-        this.productId = productId;
-        this.qantity = qantity;
+        this.quantity = quantity;
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
     }
 
-    public CartItem(int sessionId, int productId, int qantity, Timestamp createdAt, Timestamp modifiedAt) {
-        this.sessionId = sessionId;
-        this.productId = productId;
-        this.qantity = qantity;
+    public CartItem(Integer quantity, Timestamp createdAt, Timestamp modifiedAt) {
+        this.quantity = quantity;
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getSessionId() {
-        return sessionId;
+
+    public Integer getQantity() {
+        return quantity;
     }
 
-    public void setSessionId(int sessionId) {
-        this.sessionId = sessionId;
-    }
-
-    public int getProductId() {
-        return productId;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
-
-    public int getQantity() {
-        return qantity;
-    }
-
-    public void setQantity(int qantity) {
-        this.qantity = qantity;
+    public void setQantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     public Timestamp getCreatedAt() {

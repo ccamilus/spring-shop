@@ -1,11 +1,18 @@
 package pl.skefb.springshop.shop_user_payment;
 
+import lombok.ToString;
+import pl.skefb.springshop.product.Product;
+import pl.skefb.springshop.user.User;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table
+@ToString
 public class ShopUserPayment {
     @Id
     @SequenceGenerator(
@@ -17,47 +24,40 @@ public class ShopUserPayment {
             strategy = GenerationType.SEQUENCE,
             generator = "user_payment_sequence"
     )
-    private int id;
-    private int userId;
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     private String paymentType;
     private String provider;
-    private int accountNo;
+    private Integer accountNo;
     private Date expiry;
 
     public ShopUserPayment() {
     }
 
-    public ShopUserPayment(int id, int userId, String paymentType, String provider, int accountNo, Date expiry) {
+    public ShopUserPayment(Integer id, String paymentType, String provider, Integer accountNo, Date expiry) {
         this.id = id;
-        this.userId = userId;
         this.paymentType = paymentType;
         this.provider = provider;
         this.accountNo = accountNo;
         this.expiry = expiry;
     }
 
-    public ShopUserPayment(int userId, String paymentType, String provider, int accountNo, Date expiry) {
-        this.userId = userId;
+    public ShopUserPayment(String paymentType, String provider, Integer accountNo, Date expiry) {
         this.paymentType = paymentType;
         this.provider = provider;
         this.accountNo = accountNo;
         this.expiry = expiry;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getPaymentType() {
@@ -76,11 +76,11 @@ public class ShopUserPayment {
         this.provider = provider;
     }
 
-    public int getAccountNo() {
+    public Integer getAccountNo() {
         return accountNo;
     }
 
-    public void setAccountNo(int accountNo) {
+    public void setAccountNo(Integer accountNo) {
         this.accountNo = accountNo;
     }
 

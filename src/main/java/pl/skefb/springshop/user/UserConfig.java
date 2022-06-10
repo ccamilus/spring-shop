@@ -14,28 +14,30 @@ public class UserConfig {
 
     @Bean
     CommandLineRunner commandLineRunnerUser(UserRepository repository) {
-        return args -> {
-            User major = new User(
-                    "J00r",
-                    "123",
-                    "Wojciech",
-                    "Suchodolski",
-                    123966789,
-                    new Timestamp(System.currentTimeMillis()),
-                    new Timestamp(System.currentTimeMillis()),
-                    "jaj00r@wp.pl"
-            );
+        User major = new User(
+                "J00r",
+                "123",
+                "Wojciech",
+                "Suchodolski",
+                123966789,
+                new Timestamp(System.currentTimeMillis()),
+                new Timestamp(System.currentTimeMillis()),
+                "jaj00r@wp.pl"
+        );
 
-            User konon = new User(
-                    "Konon",
-                    "123",
-                    "Krzyszftof",
-                    "Kononowicz",
-                    123456789,
-                    new Timestamp(System.currentTimeMillis()),
-                    new Timestamp(System.currentTimeMillis()),
-                    "konon@wp.pl"
-            );
+        User konon = new User(
+                "Konon",
+                "123",
+                "Krzyszftof",
+                "Kononowicz",
+                123456789,
+                new Timestamp(System.currentTimeMillis()),
+                new Timestamp(System.currentTimeMillis()),
+                "konon@wp.pl"
+        );
+
+        return args -> {
+
 
             repository.saveAll(
                     List.of(major, konon)

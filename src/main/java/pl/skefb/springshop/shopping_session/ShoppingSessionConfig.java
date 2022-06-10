@@ -16,7 +16,6 @@ public class ShoppingSessionConfig {
         return args -> {
             ShoppingSession s1 = new ShoppingSession(
                     1,
-                    1,
                     new BigDecimal(10),
                     new Timestamp(System.currentTimeMillis()),
                     new Timestamp(System.currentTimeMillis())

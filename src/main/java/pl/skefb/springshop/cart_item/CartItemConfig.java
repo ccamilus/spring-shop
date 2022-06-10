@@ -15,8 +15,6 @@ public class CartItemConfig {
         return args -> {
             CartItem c1 = new CartItem(
                     1,
-                    1,
-                    1,
                     15,
                     new Timestamp(System.currentTimeMillis()),
                     new Timestamp(System.currentTimeMillis())
