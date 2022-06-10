@@ -2,6 +2,7 @@ package pl.skefb.springshop.order_item;
 
 
 import lombok.*;
+import pl.skefb.springshop.order_details.OrderDetails;
 import pl.skefb.springshop.product.Product;
 
 import javax.persistence.*;
@@ -27,11 +28,15 @@ public class OrderItems {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    // TODO : add order_id
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private OrderDetails orderDetails;
 
 
-    public OrderItems(Integer quantity, Product product) {
+    // TODO : remove product inventory (depends on status in payment?)
+    public OrderItems(Integer quantity, Product product, OrderDetails order) {
         this.quantity = quantity;
         this.product = product;
+        this.orderDetails = order;
     }
 }

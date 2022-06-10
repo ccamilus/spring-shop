@@ -1,9 +1,12 @@
 package pl.skefb.springshop.order_details;
 
 import lombok.*;
+import pl.skefb.springshop.order_item.OrderItems;
 import pl.skefb.springshop.payment_details.PaymentDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "order_details")
@@ -21,12 +24,19 @@ public class OrderDetails {
     )
     private Integer id;
 
+    // TODO : automatically calculate total value
     @Column(scale = 2)
     private double total;
 
     @OneToOne
     @JoinColumn(name = "payment_id")
     private PaymentDetails payment;
+
+    @OneToMany(
+            mappedBy = "orderDetails",
+            cascade = CascadeType.ALL
+    )
+    private List<OrderItems> orderItems = new ArrayList<>();
 
     // TODO : add user_id
 

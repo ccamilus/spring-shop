@@ -22,6 +22,8 @@ public class PaymentDetails {
     private Integer id;
     private Integer amount;
     private String provider;
+
+    // TODO : create enum STATUS
     private String status;
 
     @OneToOne(
