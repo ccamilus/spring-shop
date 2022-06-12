@@ -11,7 +11,7 @@ import javax.persistence.*;
 
 @Entity
 @Table
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @ToString
+@Getter @Setter @NoArgsConstructor @ToString
 public class Product {
     @Id
     @SequenceGenerator(
