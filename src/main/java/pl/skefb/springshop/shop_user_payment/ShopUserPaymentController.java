@@ -7,6 +7,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1/shop_payments")
+@CrossOrigin(origins = "http://localhost:8081", allowedHeaders = "*")
 public class ShopUserPaymentController {
 
     private final ShopUserPaymentService shopUserPaymentService;

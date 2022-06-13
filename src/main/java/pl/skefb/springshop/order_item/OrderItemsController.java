@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/v1/order_items")
+@CrossOrigin(origins = "http://localhost:8081", allowedHeaders = "*")
 public class OrderItemsController {
     private final OrderItemsService orderItemsService;
 

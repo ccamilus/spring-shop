@@ -7,6 +7,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1/product_inventory")
+@CrossOrigin(origins = "http://localhost:8081", allowedHeaders = "*")
 public class ProductInventoryController {
     private final ProductInventoryService productInventoryService;
 

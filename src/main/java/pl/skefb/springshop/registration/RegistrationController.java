@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "api/v1/registration")
+@CrossOrigin(origins = "http://localhost:8081", allowedHeaders = "*")
 @AllArgsConstructor
 public class RegistrationController {
 
