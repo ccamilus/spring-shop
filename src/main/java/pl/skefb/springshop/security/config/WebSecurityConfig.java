@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/registration/**")
                 .permitAll()
                 .anyRequest()
-                .authenticated()
+                .permitAll() // TODO: change permissions
                 .and()
                 .httpBasic();
 
