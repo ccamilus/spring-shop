@@ -3,10 +3,8 @@ package pl.skefb.springshop.cart_item;
 
 import pl.skefb.springshop.product.Product;
 import pl.skefb.springshop.shopping_session.ShoppingSession;
-import pl.skefb.springshop.user.User;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.sql.Timestamp;
 
 @Entity

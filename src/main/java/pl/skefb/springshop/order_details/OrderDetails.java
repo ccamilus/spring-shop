@@ -3,8 +3,7 @@ package pl.skefb.springshop.order_details;
 import lombok.*;
 import pl.skefb.springshop.order_item.OrderItems;
 import pl.skefb.springshop.payment_details.PaymentDetails;
-import pl.skefb.springshop.product.Product;
-import pl.skefb.springshop.user.User;
+import pl.skefb.springshop.shopuser.ShopUser;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -44,7 +43,7 @@ public class OrderDetails {
 
     @OneToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private ShopUser shopUser;
 
     // TODO : Create 2 more TIMESTAMP variables
 

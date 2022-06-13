@@ -1,9 +1,8 @@
 package pl.skefb.springshop.shop_user_address;
 
-import pl.skefb.springshop.user.User;
+import pl.skefb.springshop.shopuser.ShopUser;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 
 @Entity
 @Table(name = "shop_user_address")
@@ -22,7 +21,7 @@ public class ShopUserAddress {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private ShopUser shopUser;
     private String addressLine1;
     private String addressLine2;
     private String city;

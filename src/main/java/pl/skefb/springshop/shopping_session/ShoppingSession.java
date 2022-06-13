@@ -1,7 +1,6 @@
 package pl.skefb.springshop.shopping_session;
 
-import pl.skefb.springshop.product.Product;
-import pl.skefb.springshop.user.User;
+import pl.skefb.springshop.shopuser.ShopUser;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -24,7 +23,7 @@ public class ShoppingSession {
 
     @OneToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private ShopUser shopUser;
     private BigDecimal total;
     private Timestamp createdAt;
     private Timestamp modifiedAt;

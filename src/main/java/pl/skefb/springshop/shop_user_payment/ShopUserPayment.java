@@ -1,14 +1,10 @@
 package pl.skefb.springshop.shop_user_payment;
 
 import lombok.ToString;
-import pl.skefb.springshop.product.Product;
-import pl.skefb.springshop.user.User;
+import pl.skefb.springshop.shopuser.ShopUser;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table
@@ -28,7 +24,7 @@ public class ShopUserPayment {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private ShopUser shopUser;
     private String paymentType;
     private String provider;
     private Integer accountNo;
