@@ -32,6 +32,7 @@ public class ShopUser implements UserDetails {
     private Long id;
     private String firstName;
     private String lastName;
+    @Column(unique = true)
     private String email;
     private String password;
     private Integer telephone;
@@ -39,8 +40,7 @@ public class ShopUser implements UserDetails {
     private Instant modifiedAt;
     @Enumerated(EnumType.STRING)
     private ShopUserRole shopUserRole;
-    private Boolean locked = false;
-    private Boolean enabled = true;
+    private Boolean enabled = false;
 
     public ShopUser(String firstName,
                     String lastName,
@@ -81,7 +81,7 @@ public class ShopUser implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return !locked;
+        return true;
     }
 
     @Override
