@@ -6,8 +6,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import pl.skefb.springshop.shopuser.shopuseraddress.ShopUserAddress;
+import pl.skefb.springshop.shopuser.shopuseraddress.ShopUserAddressRepository;
+import pl.skefb.springshop.shopuser.shopuserpayment.ShopUserPayment;
+import pl.skefb.springshop.shopuser.shopuserpayment.ShopUserPaymentRepository;
 
 import java.time.Instant;
+import java.time.YearMonth;
 import java.util.List;
 
 import static pl.skefb.springshop.shopuser.ShopUserRole.ADMIN;
@@ -19,7 +24,9 @@ public class ShopUserConfig {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Bean
-    public CommandLineRunner commandLineRunnerShopUserConfig(ShopUserRepository shopUserRepository) {
+    public CommandLineRunner commandLineRunnerShopUserConfig(ShopUserRepository shopUserRepository,
+                                                             ShopUserAddressRepository shopUserAddressRepository,
+                                                             ShopUserPaymentRepository shopUserPaymentRepository) {
         return args -> {
             ShopUser jan = new ShopUser(
                     "Jan",
@@ -51,11 +58,52 @@ public class ShopUserConfig {
                     USER
             );
             marek.setEnabled(true);
+            ShopUserAddress janAddress1 = new ShopUserAddress(
+                    jan,
+                    "Szkolna 17",
+                    "789456123",
+                    "Starosielce",
+                    "66-666",
+                    "Bombas"
+            );
+            ShopUserAddress janAddress2 = new ShopUserAddress(
+                    jan,
+                    "Rzemieślnicza 23",
+                    "123456789",
+                    "Białystok",
+                    "77-888",
+                    "Polska"
+            );
+            ShopUserPayment janPayment1 = new ShopUserPayment(
+                    jan,
+                    "1234123412341234",
+                    YearMonth.now().plusMonths(5),
+                    "666"
+            );
+            ShopUserPayment janPayment2 = new ShopUserPayment(
+                    jan,
+                    "7894789478947894",
+                    YearMonth.now().plusYears(2),
+                    "789"
+            );
+
             shopUserRepository.saveAll(
                     List.of(
                             jan,
                             adam,
                             marek
+                    )
+            );
+            shopUserAddressRepository.saveAll(
+                    List.of(
+                            janAddress1,
+                            janAddress2
+                    )
+            );
+            shopUserPaymentRepository.saveAll(
+                    List.of(
+                            janPayment1,
+                            janPayment2
                     )
             );
         };

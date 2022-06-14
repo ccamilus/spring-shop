@@ -1,11 +1,14 @@
 package pl.skefb.springshop.shopuser.shopuseraddress;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import pl.skefb.springshop.shopuser.ShopUser;
 
 import javax.persistence.*;
 
+@Data
+@NoArgsConstructor
 @Entity
-@Table(name = "shop_user_address")
 public class ShopUserAddress {
     @Id
     @SequenceGenerator(
@@ -18,103 +21,20 @@ public class ShopUserAddress {
             generator = "shop_user_address_sequence"
     )
     private Integer id;
-
     @ManyToOne
-    @JoinColumn(name = "user_id")
     private ShopUser shopUser;
-    private String addressLine1;
-    private String addressLine2;
+    private String addressLine;
+    private String telephone;
     private String city;
     private String postalCode;
     private String country;
-    private String telephone;
-    private String mobilePhone;
 
-    public ShopUserAddress(Integer id, String addressLine1, String addressLine2, String city, String postalCode, String country, String telephone, String mobilePhone) {
-        this.id = id;
-        this.addressLine1 = addressLine1;
-        this.addressLine2 = addressLine2;
+    public ShopUserAddress(ShopUser shopUser, String addressLine, String telephone, String city, String postalCode, String country) {
+        this.shopUser = shopUser;
+        this.addressLine = addressLine;
+        this.telephone = telephone;
         this.city = city;
         this.postalCode = postalCode;
         this.country = country;
-        this.telephone = telephone;
-        this.mobilePhone = mobilePhone;
-    }
-
-    public ShopUserAddress(String addressLine1, String addressLine2, String city, String postalCode, String country, String telephone, String mobilePhone) {
-        this.addressLine1 = addressLine1;
-        this.addressLine2 = addressLine2;
-        this.city = city;
-        this.postalCode = postalCode;
-        this.country = country;
-        this.telephone = telephone;
-        this.mobilePhone = mobilePhone;
-    }
-
-    public ShopUserAddress() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getAddressLine1() {
-        return addressLine1;
-    }
-
-    public void setAddressLine1(String addressLine1) {
-        this.addressLine1 = addressLine1;
-    }
-
-    public String getAddressLine2() {
-        return addressLine2;
-    }
-
-    public void setAddressLine2(String addressLine2) {
-        this.addressLine2 = addressLine2;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
-    public String getMobilePhone() {
-        return mobilePhone;
-    }
-
-    public void setMobilePhone(String mobilePhone) {
-        this.mobilePhone = mobilePhone;
     }
 }

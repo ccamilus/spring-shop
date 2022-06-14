@@ -1,14 +1,15 @@
 package pl.skefb.springshop.shopuser.shopuserpayment;
 
-import lombok.ToString;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import pl.skefb.springshop.shopuser.ShopUser;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.YearMonth;
 
+@Data
+@NoArgsConstructor
 @Entity
-@Table
-@ToString
 public class ShopUserPayment {
     @Id
     @SequenceGenerator(
@@ -20,71 +21,17 @@ public class ShopUserPayment {
             strategy = GenerationType.SEQUENCE,
             generator = "user_payment_sequence"
     )
-    private Integer id;
-
+    private Long id;
     @ManyToOne
-    @JoinColumn(name = "user_id")
     private ShopUser shopUser;
-    private String paymentType;
-    private String provider;
-    private Integer accountNo;
-    private Date expiry;
+    private String cardNumber;
+    private YearMonth expirationDate;
+    private String cvvCode;
 
-    public ShopUserPayment() {
-    }
-
-    public ShopUserPayment(Integer id, String paymentType, String provider, Integer accountNo, Date expiry) {
-        this.id = id;
-        this.paymentType = paymentType;
-        this.provider = provider;
-        this.accountNo = accountNo;
-        this.expiry = expiry;
-    }
-
-    public ShopUserPayment(String paymentType, String provider, Integer accountNo, Date expiry) {
-        this.paymentType = paymentType;
-        this.provider = provider;
-        this.accountNo = accountNo;
-        this.expiry = expiry;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getPaymentType() {
-        return paymentType;
-    }
-
-    public void setPaymentType(String paymentType) {
-        this.paymentType = paymentType;
-    }
-
-    public String getProvider() {
-        return provider;
-    }
-
-    public void setProvider(String provider) {
-        this.provider = provider;
-    }
-
-    public Integer getAccountNo() {
-        return accountNo;
-    }
-
-    public void setAccountNo(Integer accountNo) {
-        this.accountNo = accountNo;
-    }
-
-    public Date getExpiry() {
-        return expiry;
-    }
-
-    public void setExpiry(Date expiry) {
-        this.expiry = expiry;
+    public ShopUserPayment(ShopUser shopUser, String cardNumber, YearMonth expirationDate, String cvvCode) {
+        this.shopUser = shopUser;
+        this.cardNumber = cardNumber;
+        this.expirationDate = expirationDate;
+        this.cvvCode = cvvCode;
     }
 }

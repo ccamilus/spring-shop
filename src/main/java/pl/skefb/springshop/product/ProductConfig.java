@@ -74,7 +74,6 @@ public class ProductConfig {
                     productInventory3,
                     productInventory4,
                     productInventory5
-
             ));
             productCategoryRepository.saveAll(List.of(
                     productCategory1,

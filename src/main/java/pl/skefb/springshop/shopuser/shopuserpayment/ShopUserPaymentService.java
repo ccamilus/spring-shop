@@ -1,29 +1,18 @@
 package pl.skefb.springshop.shopuser.shopuserpayment;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
+@AllArgsConstructor
 @Service
 public class ShopUserPaymentService {
-
     private final ShopUserPaymentRepository shopUserPaymentRepository;
 
-    @Autowired
-    public ShopUserPaymentService(ShopUserPaymentRepository shopUserPaymentRepository) {
-        this.shopUserPaymentRepository = shopUserPaymentRepository;
-    }
-
-    public List<ShopUserPayment> getPayments() {
-        return shopUserPaymentRepository.findAll();
-    }
-
-    public void deletePayment (int shopUserPaymentID) {
-        boolean exists = shopUserPaymentRepository.existsById(shopUserPaymentID);
-        if(!exists) {
-            throw new IllegalStateException("Payment with id " + shopUserPaymentID + " does not exist!");
-        }
-        shopUserPaymentRepository.deleteById(shopUserPaymentID);
+    public Optional<List<ShopUserPayment>> getShopUserPaymentsByShopUserId(Long shopUserId) {
+        return shopUserPaymentRepository.getShopUserPaymentsByShopUserId(shopUserId);
     }
 }

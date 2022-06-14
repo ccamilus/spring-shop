@@ -1,30 +1,17 @@
 package pl.skefb.springshop.shopuser.shopuseraddress;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class ShopUserAddressService {
-
     private final ShopUserAddressRepository shopUserAddressRepository;
 
-    @Autowired
-    public ShopUserAddressService(ShopUserAddressRepository shopUserAddressRepository) {
-        this.shopUserAddressRepository = shopUserAddressRepository;
+    public Optional<List<ShopUserAddress>> getAddressesByUserId(Long shopUserId) {
+        return shopUserAddressRepository.getShopUserAddressesByShopUserId(shopUserId);
     }
-
-    public List<ShopUserAddress> getAddresses() {
-        return shopUserAddressRepository.findAll();
-    }
-
-    public void deleteAddress(int shopUserAddressID) {
-        boolean exists = shopUserAddressRepository.existsById(shopUserAddressID);
-        if (!exists) {
-            throw new IllegalStateException("Address with id " + shopUserAddressID + " does not exist!");
-        }
-        shopUserAddressRepository.deleteById(shopUserAddressID);
-    }
-
 }
