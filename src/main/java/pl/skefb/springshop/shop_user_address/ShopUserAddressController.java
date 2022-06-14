@@ -7,7 +7,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1/shop_user_address")
-@CrossOrigin(origins = "http://localhost:8081", allowedHeaders = "*")
 public class ShopUserAddressController {
 
     private final ShopUserAddressService shopUserAddressService;

@@ -9,7 +9,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/v1/product_category")
-@CrossOrigin(origins = "http://localhost:8081", allowedHeaders = "*")
 public class ProductCategoryController {
 
     private final ProductCategoryService productCategoryService;

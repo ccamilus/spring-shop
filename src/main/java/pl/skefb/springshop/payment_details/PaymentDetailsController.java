@@ -9,7 +9,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/v1/payment_details")
-@CrossOrigin(origins = "http://localhost:8081", allowedHeaders = "*")
 public class PaymentDetailsController {
     private final PaymentDetailsService paymentDetailsService;
 
