@@ -1,9 +1,6 @@
 package pl.skefb.springshop.shopuser;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,9 +10,7 @@ import java.time.Instant;
 import java.util.Collection;
 import java.util.Collections;
 
-@Getter
-@Setter
-@EqualsAndHashCode
+@Data
 @NoArgsConstructor
 @Entity
 public class ShopUser implements UserDetails {
@@ -37,7 +32,6 @@ public class ShopUser implements UserDetails {
     private String password;
     private Integer telephone;
     private Instant createdAt;
-    private Instant modifiedAt;
     @Enumerated(EnumType.STRING)
     private ShopUserRole shopUserRole;
     private Boolean enabled = false;

@@ -1,6 +1,7 @@
 package pl.skefb.springshop.product;
 
 import lombok.*;
+import pl.skefb.springshop.product.productcategory.ProductCategory;
 import pl.skefb.springshop.product.productinventory.ProductInventory;
 
 import javax.persistence.*;
@@ -29,16 +30,20 @@ public class Product {
     private String imageUrl;
     @OneToOne
     private ProductInventory productInventory;
+    @ManyToOne
+    private ProductCategory productCategory;
 
     public Product(String name,
                    String description,
                    double price,
                    String imageUrl,
-                   ProductInventory productInventory) {
+                   ProductInventory productInventory,
+                   ProductCategory productCategory) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.imageUrl = imageUrl;
         this.productInventory = productInventory;
+        this.productCategory = productCategory;
     }
 }
