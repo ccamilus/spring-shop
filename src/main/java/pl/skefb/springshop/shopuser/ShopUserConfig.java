@@ -19,7 +19,7 @@ public class ShopUserConfig {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Bean
-    public CommandLineRunner loadData(ShopUserRepository shopUserRepository) {
+    public CommandLineRunner commandLineRunnerShopUserConfig(ShopUserRepository shopUserRepository) {
         return args -> {
             ShopUser jan = new ShopUser(
                     "Jan",

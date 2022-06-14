@@ -1,5 +1,6 @@
 package pl.skefb.springshop.product;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -7,15 +8,11 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "api/v1/product")
+@RequestMapping(path = "api/v1/products")
+@AllArgsConstructor
 public class ProductController {
 
     private final ProductService productService;
-
-    @Autowired
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
 
     @GetMapping
     public List<Product> getAllProducts() {
@@ -23,7 +20,7 @@ public class ProductController {
     }
 
     @GetMapping(path = "{productId}")
-    public Optional<Product> getProductById(@PathVariable("productId") Integer productId) {
+    public Optional<Product> getProductById(@PathVariable("productId") Long productId) {
         return this.productService.getProductById(productId);
     }
 
@@ -33,7 +30,7 @@ public class ProductController {
     }
 
     @DeleteMapping(path = "{productId}")
-    public void deleteProductById(@PathVariable("productId") Integer productId) {
+    public void deleteProductById(@PathVariable("productId") Long productId) {
         this.productService.deleteProductById(productId);
     }
 }
