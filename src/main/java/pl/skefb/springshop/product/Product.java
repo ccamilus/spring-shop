@@ -1,15 +1,14 @@
 package pl.skefb.springshop.product;
 
 import lombok.*;
+import pl.skefb.springshop.product.productinventory.ProductInventory;
 
 import javax.persistence.*;
 
 
-@Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
-@ToString
+@Entity
 public class Product {
     @Id
     @SequenceGenerator(
@@ -28,11 +27,18 @@ public class Product {
     @Column(scale = 2)
     private double price;
     private String imageUrl;
+    @OneToOne
+    private ProductInventory productInventory;
 
-    public Product(String name, String description, double price, String imageUrl) {
+    public Product(String name,
+                   String description,
+                   double price,
+                   String imageUrl,
+                   ProductInventory productInventory) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.imageUrl = imageUrl;
+        this.productInventory = productInventory;
     }
 }

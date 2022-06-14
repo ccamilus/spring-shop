@@ -1,4 +1,4 @@
-package pl.skefb.springshop.shop_user_address;
+package pl.skefb.springshop.shopuser.shopuseraddress;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;

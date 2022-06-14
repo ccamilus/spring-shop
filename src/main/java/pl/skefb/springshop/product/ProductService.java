@@ -14,23 +14,10 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     public List<Product> getAllProducts() {
-        return this.productRepository.findAll();
+        return productRepository.findAll();
     }
 
     public Optional<Product> getProductById(Long productId) {
-        return this.productRepository.findById(productId);
-    }
-
-    public void addProduct(Product product) {
-        this.productRepository.save(product);
-    }
-
-    public void deleteProductById(Long productId) {
-        boolean notExist = ! this.productRepository.existsById(productId);
-
-        if ( notExist )
-            throw new IllegalStateException("product does not exists!");
-
-        this.productRepository.deleteById(productId);
+        return productRepository.findById(productId);
     }
 }

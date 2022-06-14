@@ -1,4 +1,4 @@
-package pl.skefb.springshop.shop_user_payment;
+package pl.skefb.springshop.shopuser.shopuserpayment;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

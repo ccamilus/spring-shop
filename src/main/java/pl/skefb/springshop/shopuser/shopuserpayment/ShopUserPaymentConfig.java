@@ -1,11 +1,9 @@
-package pl.skefb.springshop.shop_user_payment;
+package pl.skefb.springshop.shopuser.shopuserpayment;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @Configuration
