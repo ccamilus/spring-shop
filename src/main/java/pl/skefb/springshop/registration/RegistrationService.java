@@ -3,7 +3,7 @@ package pl.skefb.springshop.registration;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.skefb.springshop.EmailSenderService;
+import pl.skefb.springshop.email.EmailSenderService;
 import pl.skefb.springshop.registration.token.ConfirmationToken;
 import pl.skefb.springshop.registration.token.ConfirmationTokenService;
 import pl.skefb.springshop.shopuser.ShopUser;

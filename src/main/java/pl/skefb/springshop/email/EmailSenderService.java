@@ -1,4 +1,4 @@
-package pl.skefb.springshop;
+package pl.skefb.springshop.email;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
