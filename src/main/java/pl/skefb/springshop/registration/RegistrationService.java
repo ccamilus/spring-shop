@@ -41,7 +41,7 @@ public class RegistrationService {
                 request.getEmail(),
                 "Confirmation link",
                 "Hello " + request.getFirstName() + ",\n your account verification link:\n" +
-                        "http://localhost:8080/api/v1/registration/confirm?token=" + token +
+                        "http://localhost:8080/registration/confirm?token=" + token +
                         "\n You have 2 weeks to activate your account."
         );
         return token;
