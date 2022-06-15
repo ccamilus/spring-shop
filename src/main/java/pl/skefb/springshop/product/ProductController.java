@@ -2,6 +2,8 @@ package pl.skefb.springshop.product;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import pl.skefb.springshop.exception.ApiRequestException;
+import pl.skefb.springshop.exception.ProductNotFoundException;
 import pl.skefb.springshop.product.productinventory.ProductInventory;
 import pl.skefb.springshop.product.productinventory.ProductInventoryService;
 

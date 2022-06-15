@@ -6,6 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.skefb.springshop.exception.ProductNotFoundException;
+import pl.skefb.springshop.exception.UserNotFoundException;
 import pl.skefb.springshop.registration.token.ConfirmationToken;
 import pl.skefb.springshop.registration.token.ConfirmationTokenService;
 
@@ -59,9 +61,8 @@ public class ShopUserService implements UserDetailsService {
     }
 
     public ShopUser getUserById(Long id) {
-        // TODO: write better exception handler
         return shopUserRepository.findById(id)
-                .orElseThrow(() -> new IllegalStateException("user " + id + " not found"));
+                .orElseThrow(() -> new UserNotFoundException("User " + id + " not found!"));
     }
 
     public void deleteUser(Long id) {

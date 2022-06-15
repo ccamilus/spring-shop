@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
+import pl.skefb.springshop.exception.ApiRequestException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -52,7 +53,7 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } catch (JwtException e) {
-            throw new IllegalStateException(String.format("Token %s cannot be trusted", token));
+            throw new ApiRequestException("Bad token");
         }
         filterChain.doFilter(request, response);
     }

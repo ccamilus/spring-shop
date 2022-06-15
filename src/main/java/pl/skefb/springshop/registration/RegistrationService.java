@@ -39,10 +39,11 @@ public class RegistrationService {
         );
         emailSenderService.sendEmail(
                 request.getEmail(),
-                "Confirmation link",
-                "Hello " + request.getFirstName() + ",\n your account verification link:\n" +
+                "Potwierdzenie maila",
+                "Witaj " + request.getFirstName() + "!\n Oto twój link do weryfikacji konta:\n" +
                         "http://localhost:8080/registration/confirm?token=" + token +
-                        "\n You have 2 weeks to activate your account."
+                        "\n Na aktywację konta masz 2 tygodnie. Życzymy udanych zakupów w naszym sklepie!"
+                //po polsku tu
         );
         return token;
     }
