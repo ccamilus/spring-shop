@@ -19,10 +19,10 @@ public class ProductConfig {
                                                             ProductCategoryRepository productCategoryRepository) {
         return args -> {
             ProductInventory productInventory1 = new ProductInventory(10);
-            ProductInventory productInventory2 = new ProductInventory(10);
-            ProductInventory productInventory3 = new ProductInventory(10);
-            ProductInventory productInventory4 = new ProductInventory(10);
-            ProductInventory productInventory5 = new ProductInventory(10);
+            ProductInventory productInventory2 = new ProductInventory(0);
+            ProductInventory productInventory3 = new ProductInventory(8);
+            ProductInventory productInventory4 = new ProductInventory(24);
+            ProductInventory productInventory5 = new ProductInventory(105);
 
             ProductCategory productCategory1 = new ProductCategory("elektronika", "bla bla bla");
             ProductCategory productCategory2 = new ProductCategory("inna elektronika", "bla bla bla");
