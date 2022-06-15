@@ -6,6 +6,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import pl.skefb.springshop.shoppingsession.ShoppingSession;
+import pl.skefb.springshop.shoppingsession.ShoppingSessionRepository;
 import pl.skefb.springshop.shopuser.shopuseraddress.ShopUserAddress;
 import pl.skefb.springshop.shopuser.shopuseraddress.ShopUserAddressRepository;
 import pl.skefb.springshop.shopuser.shopuserpayment.ShopUserPayment;
@@ -26,7 +28,8 @@ public class ShopUserConfig {
     @Bean
     public CommandLineRunner commandLineRunnerShopUserConfig(ShopUserRepository shopUserRepository,
                                                              ShopUserAddressRepository shopUserAddressRepository,
-                                                             ShopUserPaymentRepository shopUserPaymentRepository) {
+                                                             ShopUserPaymentRepository shopUserPaymentRepository,
+                                                             ShoppingSessionRepository shoppingSessionRepository) {
         return args -> {
             ShopUser jan = new ShopUser(
                     "Jan",
@@ -87,6 +90,12 @@ public class ShopUserConfig {
                     "789"
             );
 
+            ShoppingSession shoppingSession = new ShoppingSession(
+                    jan,
+                    0,
+                    Instant.now()
+            );
+
             shopUserRepository.saveAll(
                     List.of(
                             jan,
@@ -106,6 +115,7 @@ public class ShopUserConfig {
                             janPayment2
                     )
             );
+            shoppingSessionRepository.save(shoppingSession);
         };
     }
 }
