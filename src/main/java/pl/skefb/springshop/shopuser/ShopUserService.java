@@ -26,13 +26,13 @@ public class ShopUserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return shopUserRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User with email " + email + " not found"));
+                .orElseThrow(() -> new UsernameNotFoundException("User with email " + email + " not found!"));
     }
 
     public String signUpUser(ShopUser shopUser) {
         boolean userExists = shopUserRepository.existsByEmail(shopUser.getEmail());
         if (userExists) {
-            throw new IllegalStateException("email already taken");
+            throw new IllegalStateException("Email already taken!");
         }
         String encodedPassword = bCryptPasswordEncoder.encode(shopUser.getPassword());
         shopUser.setPassword(encodedPassword);
@@ -70,6 +70,6 @@ public class ShopUserService implements UserDetailsService {
 
     public ShopUser findByEmail(String email) {
         return shopUserRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User with email " + email + " not found"));
+                .orElseThrow(() -> new UsernameNotFoundException("User with email " + email + " not found!"));
     }
 }

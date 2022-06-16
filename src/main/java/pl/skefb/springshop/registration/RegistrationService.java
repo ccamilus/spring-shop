@@ -23,7 +23,7 @@ public class RegistrationService {
     public String register(RegistrationRequest request) {
         boolean isValidEmail = emailValidator.test(request.getEmail());
         if (!isValidEmail) {
-            throw new IllegalStateException("email not valid");
+            throw new IllegalStateException("Email not valid!");
         }
         String token = shopUserService.signUpUser(
                 new ShopUser(
@@ -38,10 +38,10 @@ public class RegistrationService {
         );
         emailSenderService.sendEmail(
                 request.getEmail(),
-                "Potwierdzenie maila",
-                "Witaj " + request.getFirstName() + "!\n Oto twój link do weryfikacji konta:\n" +
-                        "http://localhost:8080/registration/confirm?token=" + token + "\n Na aktywację konta " +
-                        "masz 2 tygodnie. Życzymy udanych zakupów w naszym sklepie!");
+                "Weryfikacja konta",
+                "Dzień dobry " + request.getFirstName() + "!\n Oto Wwój link do weryfikacji konta:\n" +
+                        "http://localhost:8080/registration/confirm?token=" + token + "\n Link wygaśnie " +
+                        "za 2 tyognie od otrzymania wiadomości. Życzymy udanych zakupów w naszym sklepie!");
         return token;
     }
 
@@ -49,11 +49,11 @@ public class RegistrationService {
     public String confirmToken(String token) {
         ConfirmationToken confirmationToken = confirmationTokenService.getToken(token);
         if (confirmationToken.getConfirmedAt() != null) {
-            throw new IllegalStateException("email already confirmed");
+            throw new IllegalStateException("Email already confirmed!");
         }
         Instant expiredAt = confirmationToken.getExpiresAt();
         if (expiredAt.isBefore(Instant.now())) {
-            throw new IllegalStateException("token expired");
+            throw new IllegalStateException("Token expired!");
         }
         confirmationTokenService.setConfirmedAt(token);
         shopUserService.enableShopUser(confirmationToken.getShopUser().getEmail());

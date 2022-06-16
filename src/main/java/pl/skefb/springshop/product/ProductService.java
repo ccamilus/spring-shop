@@ -2,6 +2,7 @@ package pl.skefb.springshop.product;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.skefb.springshop.exception.ProductNotFoundException;
 
 import java.util.List;
 
@@ -16,6 +17,6 @@ public class ProductService {
     }
 
     public Product getProductById(Long productId) {
-        return productRepository.findById(productId).orElseThrow(() -> new IllegalStateException("product not found"));
+        return productRepository.findById(productId).orElseThrow(() -> new ProductNotFoundException("Product not found!"));
     }
 }

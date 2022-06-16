@@ -33,7 +33,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
                             authenticationRequest.getPassword());
             return authenticationManager.authenticate(authentication);
         } catch (IOException e) {
-            throw new RuntimeException("kurła");
+            throw new RuntimeException("Authentication failed!");
         }
     }
 
