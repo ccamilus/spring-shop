@@ -8,8 +8,6 @@ import pl.skefb.springshop.product.Product;
 import pl.skefb.springshop.product.ProductService;
 import pl.skefb.springshop.shoppingsession.ShoppingSession;
 import pl.skefb.springshop.shoppingsession.ShoppingSessionService;
-import pl.skefb.springshop.shopuser.ShopUser;
-import pl.skefb.springshop.shopuser.ShopUserRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,7 +36,6 @@ public class CartItemService {
                                                         Authentication authentication) {
         Optional<ShoppingSession> shoppingSession =
                 shoppingSessionService.getCurrentlyActiveShoppingSession(authentication);
-
         Optional<Product> product =
                 productService.getProductById(cartItemRequest.getProductId());
         if (shoppingSession.isEmpty()) {
@@ -47,25 +44,47 @@ public class CartItemService {
         if (product.isEmpty()) {
             throw new IllegalStateException("product not found");
         }
+        double total = shoppingSession.get().getTotal();
+        total += product.get().getPrice() * cartItemRequest.getQuantity();
+        shoppingSession.get().setTotal(total);
         CartItem cartItem = new CartItem(shoppingSession.get(), product.get(), cartItemRequest.getQuantity());
         cartItemRepository.save(cartItem);
     }
 
+    @Transactional
     public void changeCartItemQuantity(Long cartItemId, Integer quantity, Authentication authentication) {
-        Optional<ShoppingSession> shoppingSession =
-                shoppingSessionService.getCurrentlyActiveShoppingSession(authentication);
-        if (shoppingSession.isEmpty()) {
-            throw new IllegalStateException("shopping session not found");
-        }
-        cartItemRepository.changeCartItemQuantity(cartItemId, quantity, shoppingSession.get().getId());
+        ShoppingSession shoppingSession = getCurrentlyActiveShoppingSession(authentication);
+        CartItem cartItem = getCartItemById(cartItemId);
+        double difference = (cartItem.getQuantity() - quantity) * cartItem.getProduct().getPrice();
+        shoppingSessionService.updateTotalByDifference(authentication, difference);
+        cartItemRepository.changeCartItemQuantity(cartItemId, quantity, shoppingSession.getId());
     }
 
+    @Transactional
     public void deleteCartItemById(Long cartItemId, Authentication authentication) {
+        ShoppingSession shoppingSession = getCurrentlyActiveShoppingSession(authentication);
+        CartItem cartItem = getCartItemById(cartItemId);
+        double difference = cartItem.getQuantity() * cartItem.getProduct().getPrice();
+        shoppingSessionService.updateTotalByDifference(authentication, difference);
+        cartItemRepository.deleteCartItemById(cartItemId, shoppingSession.getId());
+    }
+
+    private ShoppingSession getCurrentlyActiveShoppingSession(Authentication authentication) {
         Optional<ShoppingSession> shoppingSession =
                 shoppingSessionService.getCurrentlyActiveShoppingSession(authentication);
         if (shoppingSession.isEmpty()) {
             throw new IllegalStateException("shopping session not found");
+        } else {
+            return shoppingSession.get();
         }
-        cartItemRepository.deleteCartItemById(cartItemId, shoppingSession.get().getId());
+    }
+
+    private CartItem getCartItemById(Long cartItemId) {
+        Optional<CartItem> cartItem = cartItemRepository.getCartItemById(cartItemId);
+        if (cartItem.isEmpty()) {
+            throw new IllegalStateException("cart item not found");
+        } else {
+            return cartItem.get();
+        }
     }
 }

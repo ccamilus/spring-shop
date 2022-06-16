@@ -53,4 +53,19 @@ public class ShoppingSessionService {
         currentShoppingSession.ifPresent(shoppingSession ->
                 shoppingSessionRepository.closeCurrentShoppingSession(shoppingSession.getId()));
     }
+
+    public void updateTotalByDifference(Authentication authentication, Double difference) {
+        String email = authentication.getName();
+        Optional<ShopUser> shopUser = shopUserRepository.findByEmail(email);
+        if (shopUser.isEmpty()) {
+            throw new IllegalStateException("user not found");
+        }
+
+        Optional<ShoppingSession> currentShoppingSession =
+                shoppingSessionRepository.getCurrentlyActiveShoppingSession(shopUser.get().getId());
+
+        currentShoppingSession.ifPresent(shoppingSession ->
+                shoppingSessionRepository.updateTotal(shoppingSession.getId(),
+                        shoppingSession.getTotal() - difference));
+    }
 }
