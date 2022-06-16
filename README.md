@@ -14,6 +14,6 @@ Project is created with:
 * PostgreSQL
 
 ## Setup
-To run this project, intall it locally using mvn:
+To run this project, install it locally using mvn:
 ```
 $ mvn spring-boot:run

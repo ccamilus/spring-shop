@@ -1,0 +1,3 @@
+Ocena: 4
+- do projektu wykonano frontend: https://github.com/ccamilus/spring-shop-frontend
+- użyto Spring Security i JSON Web Token do autoryzacji i uwierzytelniania
