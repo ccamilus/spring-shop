@@ -20,7 +20,7 @@ public class ShopUserAddress {
             strategy = GenerationType.SEQUENCE,
             generator = "shop_user_address_sequence"
     )
-    private Integer id;
+    private Long id;
     @ManyToOne
     private ShopUser shopUser;
     private String addressLine;

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ShoppingSessionRepository extends JpaRepository<ShoppingSession, Integer> {
+public interface ShoppingSessionRepository extends JpaRepository<ShoppingSession, Long> {
     @Transactional
     @Query("SELECT ss FROM ShoppingSession ss WHERE ss.isExpired = false AND ss.shopUser.id = ?1")
     Optional<ShoppingSession> getCurrentlyActiveShoppingSession(Long shopUserId);

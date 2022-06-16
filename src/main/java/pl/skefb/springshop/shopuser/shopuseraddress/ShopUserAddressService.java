@@ -11,7 +11,11 @@ import java.util.Optional;
 public class ShopUserAddressService {
     private final ShopUserAddressRepository shopUserAddressRepository;
 
-    public Optional<List<ShopUserAddress>> getAddressesByUserId(Long shopUserId) {
-        return shopUserAddressRepository.getShopUserAddressesByShopUserId(shopUserId);
+    public List<ShopUserAddress> getAddressesByUserId(Long id) {
+        return shopUserAddressRepository.getShopUserAddressesById(id);
+    }
+
+    public ShopUserAddress getShopUserAddressById(Long id) {
+        return shopUserAddressRepository.getById(id);
     }
 }

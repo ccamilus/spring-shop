@@ -8,7 +8,6 @@ import pl.skefb.springshop.shopuser.shopuserpayment.ShopUserPayment;
 import pl.skefb.springshop.shopuser.shopuserpayment.ShopUserPaymentService;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/v1/shop-users")
@@ -29,12 +28,12 @@ public class ShopUserController {
     }
 
     @GetMapping(path = "{shopUserId}/addresses")
-    public Optional<List<ShopUserAddress>> getUserAddressesByShopUserId(@PathVariable("shopUserId") Long shopUserId) {
+    public List<ShopUserAddress> getUserAddressesByShopUserId(@PathVariable("shopUserId") Long shopUserId) {
         return shopUserAddressService.getAddressesByUserId(shopUserId);
     }
 
     @GetMapping(path = "{shopUserId}/payments")
-    public Optional<List<ShopUserPayment>> getShopUserPaymentsByShopUserId(@PathVariable("shopUserId") Long shopUserId) {
+    public List<ShopUserPayment> getShopUserPaymentsByShopUserId(@PathVariable("shopUserId") Long shopUserId) {
         return shopUserPaymentService.getShopUserPaymentsByShopUserId(shopUserId);
     }
 

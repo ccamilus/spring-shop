@@ -27,7 +27,6 @@ public class CartItemService {
         if (shoppingSession.isEmpty()) {
             throw new IllegalStateException("shopping session not found");
         }
-
         return cartItemRepository.getCartItemsByShoppingSessionId(shoppingSession.get().getId());
     }
 
@@ -54,7 +53,7 @@ public class CartItemService {
     @Transactional
     public void changeCartItemQuantity(Long cartItemId, Integer quantity, Authentication authentication) {
         ShoppingSession shoppingSession = getCurrentlyActiveShoppingSession(authentication);
-        CartItem cartItem = getCartItemById(cartItemId);
+        CartItem cartItem = cartItemRepository.getById(cartItemId);
         double difference = (cartItem.getQuantity() - quantity) * cartItem.getProduct().getPrice();
         shoppingSessionService.updateTotalByDifference(authentication, difference);
         cartItemRepository.changeCartItemQuantity(cartItemId, quantity, shoppingSession.getId());
@@ -63,7 +62,7 @@ public class CartItemService {
     @Transactional
     public void deleteCartItemById(Long cartItemId, Authentication authentication) {
         ShoppingSession shoppingSession = getCurrentlyActiveShoppingSession(authentication);
-        CartItem cartItem = getCartItemById(cartItemId);
+        CartItem cartItem = cartItemRepository.getById(cartItemId);
         double difference = cartItem.getQuantity() * cartItem.getProduct().getPrice();
         shoppingSessionService.updateTotalByDifference(authentication, difference);
         cartItemRepository.deleteCartItemById(cartItemId, shoppingSession.getId());
@@ -79,12 +78,4 @@ public class CartItemService {
         }
     }
 
-    private CartItem getCartItemById(Long cartItemId) {
-        Optional<CartItem> cartItem = cartItemRepository.getCartItemById(cartItemId);
-        if (cartItem.isEmpty()) {
-            throw new IllegalStateException("cart item not found");
-        } else {
-            return cartItem.get();
-        }
-    }
 }

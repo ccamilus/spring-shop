@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
+public interface CartItemRepository extends JpaRepository<CartItem, Long> {
     Optional<List<CartItem>> getCartItemsByShoppingSessionId(Long shoppingSessionId);
 
     @Transactional
@@ -22,6 +22,4 @@ public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
     @Modifying
     @Query("DELETE FROM CartItem ci WHERE ci.id = ?1 AND ci.shoppingSession.id = ?2")
     void deleteCartItemById(Long cartItemId, Long shoppingSessionId);
-
-    Optional<CartItem> getCartItemById(Long cartItemId);
 }
