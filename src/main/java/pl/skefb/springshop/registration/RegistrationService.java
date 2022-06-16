@@ -23,7 +23,6 @@ public class RegistrationService {
     public String register(RegistrationRequest request) {
         boolean isValidEmail = emailValidator.test(request.getEmail());
         if (!isValidEmail) {
-            // TODO: write better exception handler
             throw new IllegalStateException("email not valid");
         }
         String token = shopUserService.signUpUser(
@@ -41,33 +40,23 @@ public class RegistrationService {
                 request.getEmail(),
                 "Potwierdzenie maila",
                 "Witaj " + request.getFirstName() + "!\n Oto twój link do weryfikacji konta:\n" +
-                        "http://localhost:8080/registration/confirm?token=" + token +
-                        "\n Na aktywację konta masz 2 tygodnie. Życzymy udanych zakupów w naszym sklepie!"
-                //po polsku tu
-        );
+                        "http://localhost:8080/registration/confirm?token=" + token + "\n Na aktywację konta " +
+                        "masz 2 tygodnie. Życzymy udanych zakupów w naszym sklepie!");
         return token;
     }
 
     @Transactional
     public String confirmToken(String token) {
-        ConfirmationToken confirmationToken = confirmationTokenService
-                .getToken(token)
-                .orElseThrow(() ->
-                        new IllegalStateException("token not found"));
-
+        ConfirmationToken confirmationToken = confirmationTokenService.getToken(token);
         if (confirmationToken.getConfirmedAt() != null) {
             throw new IllegalStateException("email already confirmed");
         }
-
         Instant expiredAt = confirmationToken.getExpiresAt();
-
         if (expiredAt.isBefore(Instant.now())) {
             throw new IllegalStateException("token expired");
         }
-
         confirmationTokenService.setConfirmedAt(token);
-        shopUserService.enableShopUser(
-                confirmationToken.getShopUser().getEmail());
+        shopUserService.enableShopUser(confirmationToken.getShopUser().getEmail());
         return "confirmed";
     }
 }

@@ -7,11 +7,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
-import java.util.Optional;
 
 @Repository
 public interface ConfirmationTokenRepository extends JpaRepository<ConfirmationToken, Long> {
-    Optional<ConfirmationToken> findByToken(String token);
+    ConfirmationToken findByToken(String token);
 
     @Transactional
     @Modifying

@@ -12,15 +12,8 @@ import java.time.YearMonth;
 @Entity
 public class ShopUserPayment {
     @Id
-    @SequenceGenerator(
-            name = "user_payment_sequence",
-            sequenceName = "user_payment_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_payment_sequence"
-    )
+    @SequenceGenerator(name = "user_payment_sequence", sequenceName = "user_payment_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_payment_sequence")
     private Long id;
     @ManyToOne
     private ShopUser shopUser;

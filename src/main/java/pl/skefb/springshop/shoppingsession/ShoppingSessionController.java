@@ -2,8 +2,6 @@ package pl.skefb.springshop.shoppingsession;
 
 
 import lombok.AllArgsConstructor;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import pl.skefb.springshop.shoppingsession.cartitem.CartItem;
@@ -11,7 +9,6 @@ import pl.skefb.springshop.shoppingsession.cartitem.CartItemRequest;
 import pl.skefb.springshop.shoppingsession.cartitem.CartItemService;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/v1/shopping-session")
@@ -21,7 +18,7 @@ public class ShoppingSessionController {
     private final CartItemService cartItemService;
 
     @GetMapping()
-    private Optional<ShoppingSession> getCurrentlyActiveShoppingSession(Authentication authentication) {
+    private ShoppingSession getCurrentlyActiveShoppingSession(Authentication authentication) {
         return shoppingSessionService.getCurrentlyActiveShoppingSession(authentication);
     }
 
@@ -31,7 +28,7 @@ public class ShoppingSessionController {
     }
 
     @GetMapping("cart-items")
-    private Optional<List<CartItem>> getAllCartItems(Authentication authentication) {
+    private List<CartItem> getAllCartItems(Authentication authentication) {
         return cartItemService.getAllCartItemByShoppingSessionId(authentication);
     }
 

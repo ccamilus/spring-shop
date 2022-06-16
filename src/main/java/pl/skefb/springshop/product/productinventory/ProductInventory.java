@@ -10,15 +10,9 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class ProductInventory {
     @Id
-    @SequenceGenerator(
-            name = "product_inventory_sequence",
-            sequenceName = "product_inventory_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "product_inventory_sequence"
-    )
+    @SequenceGenerator(name = "product_inventory_sequence", sequenceName = "product_inventory_sequence",
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_inventory_sequence")
     public Long id;
     public int quantity;
 

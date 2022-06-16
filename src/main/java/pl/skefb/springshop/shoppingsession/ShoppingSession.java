@@ -5,8 +5,6 @@ import lombok.NoArgsConstructor;
 import pl.skefb.springshop.shopuser.ShopUser;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.time.Instant;
 
 @Entity
@@ -14,15 +12,9 @@ import java.time.Instant;
 @NoArgsConstructor
 public class ShoppingSession {
     @Id
-    @SequenceGenerator(
-            name = "shopping_session_sequence",
-            sequenceName = "shopping_session_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "shopping_session_sequence"
-    )
+    @SequenceGenerator(name = "shopping_session_sequence", sequenceName = "shopping_session_sequence",
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "shopping_session_sequence")
     private Long id;
     @ManyToOne
     private ShopUser shopUser;

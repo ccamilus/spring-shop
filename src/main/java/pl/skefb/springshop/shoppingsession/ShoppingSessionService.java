@@ -5,7 +5,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.skefb.springshop.shopuser.ShopUser;
-import pl.skefb.springshop.shopuser.ShopUserRepository;
+import pl.skefb.springshop.shopuser.ShopUserService;
 
 import java.time.Instant;
 import java.util.Optional;
@@ -14,58 +14,31 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ShoppingSessionService {
     private final ShoppingSessionRepository shoppingSessionRepository;
-    private final ShopUserRepository shopUserRepository;
+    private final ShopUserService shopUserService;
 
     @Transactional
-    public Optional<ShoppingSession> getCurrentlyActiveShoppingSession(Authentication authentication) {
+    public ShoppingSession getCurrentlyActiveShoppingSession(Authentication authentication) {
         String email = authentication.getName();
-        Optional<ShopUser> shopUser = shopUserRepository.findByEmail(email);
-        if (shopUser.isEmpty()) {
-            throw new IllegalStateException("user not found");
-        }
-
+        ShopUser shopUser = shopUserService.findByEmail(email);
         Optional<ShoppingSession> currentShoppingSession =
-                shoppingSessionRepository.getCurrentlyActiveShoppingSession(shopUser.get().getId());
-
-        if (currentShoppingSession.isEmpty()) {
-            ShoppingSession shoppingSession = new ShoppingSession(
-                    shopUser.get(),
-                    0,
-                    Instant.now()
-            );
+                shoppingSessionRepository.getCurrentlyActiveShoppingSession(shopUser.getId());
+        if (currentShoppingSession.isPresent()) {
+            return currentShoppingSession.get();
+        } else {
+            ShoppingSession shoppingSession = new ShoppingSession(shopUser, 0, Instant.now());
             shoppingSessionRepository.save(shoppingSession);
-            return Optional.of(shoppingSession);
+            return shoppingSession;
         }
-        return currentShoppingSession;
     }
 
     @Transactional
     public void closeCurrentShoppingSession(Authentication authentication) {
-        String email = authentication.getName();
-        Optional<ShopUser> shopUser = shopUserRepository.findByEmail(email);
-        if (shopUser.isEmpty()) {
-            throw new IllegalStateException("user not found");
-        }
-
-        Optional<ShoppingSession> currentShoppingSession =
-                shoppingSessionRepository.getCurrentlyActiveShoppingSession(shopUser.get().getId());
-
-        currentShoppingSession.ifPresent(shoppingSession ->
-                shoppingSessionRepository.closeCurrentShoppingSession(shoppingSession.getId()));
+        ShoppingSession shoppingSession = getCurrentlyActiveShoppingSession(authentication);
+        shoppingSessionRepository.closeCurrentShoppingSession(shoppingSession.getId());
     }
 
     public void updateTotalByDifference(Authentication authentication, Double difference) {
-        String email = authentication.getName();
-        Optional<ShopUser> shopUser = shopUserRepository.findByEmail(email);
-        if (shopUser.isEmpty()) {
-            throw new IllegalStateException("user not found");
-        }
-
-        Optional<ShoppingSession> currentShoppingSession =
-                shoppingSessionRepository.getCurrentlyActiveShoppingSession(shopUser.get().getId());
-
-        currentShoppingSession.ifPresent(shoppingSession ->
-                shoppingSessionRepository.updateTotal(shoppingSession.getId(),
-                        shoppingSession.getTotal() - difference));
+        ShoppingSession shoppingSession = getCurrentlyActiveShoppingSession(authentication);
+        shoppingSessionRepository.updateTotal(shoppingSession.getId(), shoppingSession.getTotal() - difference);
     }
 }

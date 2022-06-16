@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -15,7 +14,7 @@ public class ConfirmationTokenService {
         confirmationTokenRepository.save(confirmationToken);
     }
 
-    public Optional<ConfirmationToken> getToken(String token) {
+    public ConfirmationToken getToken(String token) {
         return confirmationTokenRepository.findByToken(token);
     }
 

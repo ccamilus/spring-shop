@@ -7,11 +7,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface CartItemRepository extends JpaRepository<CartItem, Long> {
-    Optional<List<CartItem>> getCartItemsByShoppingSessionId(Long shoppingSessionId);
+    List<CartItem> getCartItemsByShoppingSessionId(Long shoppingSessionId);
 
     @Transactional
     @Modifying

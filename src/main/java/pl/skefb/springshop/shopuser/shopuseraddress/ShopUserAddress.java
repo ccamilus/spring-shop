@@ -11,15 +11,9 @@ import javax.persistence.*;
 @Entity
 public class ShopUserAddress {
     @Id
-    @SequenceGenerator(
-            name = "shop_user_address_sequence",
-            sequenceName = "shop_user_address_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "shop_user_address_sequence"
-    )
+    @SequenceGenerator(name = "shop_user_address_sequence", sequenceName = "shop_user_address_sequence",
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "shop_user_address_sequence")
     private Long id;
     @ManyToOne
     private ShopUser shopUser;
@@ -29,7 +23,12 @@ public class ShopUserAddress {
     private String postalCode;
     private String country;
 
-    public ShopUserAddress(ShopUser shopUser, String addressLine, String telephone, String city, String postalCode, String country) {
+    public ShopUserAddress(ShopUser shopUser,
+                           String addressLine,
+                           String telephone,
+                           String city,
+                           String postalCode,
+                           String country) {
         this.shopUser = shopUser;
         this.addressLine = addressLine;
         this.telephone = telephone;

@@ -10,15 +10,9 @@ import javax.persistence.*;
 @Entity
 public class ProductCategory {
     @Id
-    @SequenceGenerator(
-            name = "product_category_sequence",
-            sequenceName = "product_category_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "product_category_sequence"
-    )
+    @SequenceGenerator(name = "product_category_sequence", sequenceName = "product_category_sequence",
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_category_sequence")
     public Long id;
     public String name;
     public String description;

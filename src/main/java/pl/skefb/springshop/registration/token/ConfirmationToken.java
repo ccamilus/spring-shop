@@ -1,28 +1,20 @@
 package pl.skefb.springshop.registration.token;
 
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import pl.skefb.springshop.shopuser.ShopUser;
 
 import javax.persistence.*;
 import java.time.Instant;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @Entity
 public class ConfirmationToken {
     @Id
-    @SequenceGenerator(
-            name = "confirmation_token_sequence",
-            sequenceName = "confirmation_token_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "confirmation_token_sequence"
-    )
+    @SequenceGenerator(name = "confirmation_token_sequence", sequenceName = "confirmation_token_sequence",
+            allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "confirmation_token_sequence")
     private Long id;
     @Column(nullable = false)
     private String token;
@@ -32,16 +24,10 @@ public class ConfirmationToken {
     private Instant expiresAt;
     private Instant confirmedAt;
     @ManyToOne
-    @JoinColumn(
-            nullable = false,
-            name = "shop_user_id"
-    )
+    @JoinColumn(nullable = false, name = "shop_user_id")
     private ShopUser shopUser;
 
-    public ConfirmationToken(String token,
-                             Instant createdAt,
-                             Instant expiresAt,
-                             ShopUser shopUser) {
+    public ConfirmationToken(String token, Instant createdAt, Instant expiresAt, ShopUser shopUser) {
         this.token = token;
         this.createdAt = createdAt;
         this.expiresAt = expiresAt;

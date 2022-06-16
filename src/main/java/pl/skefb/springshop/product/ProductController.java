@@ -1,14 +1,12 @@
 package pl.skefb.springshop.product;
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-import pl.skefb.springshop.exception.ApiRequestException;
-import pl.skefb.springshop.exception.ProductNotFoundException;
-import pl.skefb.springshop.product.productinventory.ProductInventory;
-import pl.skefb.springshop.product.productinventory.ProductInventoryService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/v1/products")
@@ -23,7 +21,7 @@ public class ProductController {
     }
 
     @GetMapping(path = "{productId}")
-    public Optional<Product> getProductById(@PathVariable("productId") Long productId) {
+    public Product getProductById(@PathVariable("productId") Long productId) {
         return this.productService.getProductById(productId);
     }
 }

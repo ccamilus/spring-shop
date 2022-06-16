@@ -13,15 +13,8 @@ import java.time.Instant;
 @NoArgsConstructor
 public class OrderDetails {
     @Id
-    @SequenceGenerator(
-            name = "order_details_sequence",
-            sequenceName = "order_details_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "order_details_sequence"
-    )
+    @SequenceGenerator(name = "order_details_sequence", sequenceName = "order_details_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_details_sequence")
     private Long id;
     @OneToOne
     private ShopUser shopUser;

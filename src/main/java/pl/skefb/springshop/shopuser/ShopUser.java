@@ -15,15 +15,8 @@ import java.util.Collections;
 @Entity
 public class ShopUser implements UserDetails {
     @Id
-    @SequenceGenerator(
-            name = "shop_user_sequence",
-            sequenceName = "shop_user_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "shop_user_sequence"
-    )
+    @SequenceGenerator(name = "shop_user_sequence", sequenceName = "shop_user_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "shop_user_sequence")
     private Long id;
     private String firstName;
     private String lastName;

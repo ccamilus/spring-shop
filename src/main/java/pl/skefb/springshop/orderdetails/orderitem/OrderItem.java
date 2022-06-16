@@ -12,15 +12,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class OrderItem {
     @Id
-    @SequenceGenerator(
-            name = "order_items_sequence",
-            sequenceName = "order_items_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "order_items_sequence"
-    )
+    @SequenceGenerator(name = "order_items_sequence", sequenceName = "order_items_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_items_sequence")
     private Long id;
     @ManyToOne
     private OrderDetails orderDetails;
@@ -28,9 +21,7 @@ public class OrderItem {
     private Product product;
     private Integer quantity;
 
-    public OrderItem(OrderDetails orderDetails,
-                     Product product,
-                     Integer quantity) {
+    public OrderItem(OrderDetails orderDetails, Product product, Integer quantity) {
         this.orderDetails = orderDetails;
         this.product = product;
         this.quantity = quantity;

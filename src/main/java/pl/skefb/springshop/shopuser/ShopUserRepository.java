@@ -12,8 +12,10 @@ import java.util.Optional;
 public interface ShopUserRepository extends JpaRepository<ShopUser, Long> {
     Optional<ShopUser> findByEmail(String email);
 
+    boolean existsByEmail(String email);
+
     @Transactional
     @Modifying
     @Query("UPDATE ShopUser a SET a.enabled = TRUE WHERE a.email = ?1")
-    int enableAppUser(String email);
+    void enableAppUser(String email);
 }

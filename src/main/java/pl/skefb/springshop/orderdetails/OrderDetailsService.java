@@ -14,9 +14,7 @@ import pl.skefb.springshop.shopuser.shopuseraddress.ShopUserAddressService;
 import pl.skefb.springshop.shopuser.shopuserpayment.ShopUserPaymentService;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -29,37 +27,18 @@ public class OrderDetailsService {
     private final ShopUserPaymentService shopUserPaymentService;
 
     public void makeOrder(OrderDetailsRequest orderDetailsRequest, Authentication authentication) {
-        Optional<ShoppingSession> shoppingSession =
-                shoppingSessionService.getCurrentlyActiveShoppingSession(authentication);
-        if (shoppingSession.isEmpty()) {
-            throw new IllegalStateException("shopping session not found");
-        }
-
+        ShoppingSession shoppingSession = shoppingSessionService.getCurrentlyActiveShoppingSession(authentication);
         OrderDetails orderDetails = new OrderDetails(
-                shoppingSession.get().getShopUser(),
-                shoppingSession.get().getTotal(),
+                shoppingSession.getShopUser(),
+                shoppingSession.getTotal(),
                 shopUserAddressService.getShopUserAddressById(orderDetailsRequest.getShopUserAddressId()),
                 shopUserPaymentService.getShopUserPaymentById(orderDetailsRequest.getShopUserPaymentId()),
-                Instant.now()
-        );
-
+                Instant.now());
         orderDetailsRepository.save(orderDetails);
-
-        Optional<List<CartItem>> cartItems = cartItemService.getAllCartItemByShoppingSessionId(authentication);
-        if (cartItems.isEmpty()) {
-            throw new IllegalStateException("there is no cart items");
+        List<CartItem> cartItems = cartItemService.getAllCartItemByShoppingSessionId(authentication);
+        for (CartItem cartItem : cartItems) {
+            orderItemService.addOrderItem(new OrderItem(orderDetails, cartItem.getProduct(), cartItem.getQuantity()));
         }
-
-        for (CartItem cartItem: cartItems.get()) {
-            orderItemService.addOrderItem(
-                    new OrderItem(
-                            orderDetails,
-                            cartItem.getProduct(),
-                            cartItem.getQuantity()
-                    )
-            );
-        }
-
         shoppingSessionService.closeCurrentShoppingSession(authentication);
     }
 }
