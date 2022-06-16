@@ -6,6 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.skefb.springshop.exception.EmailAlreadyConfirmedException;
+import pl.skefb.springshop.exception.EmailAlreadyTakenException;
 import pl.skefb.springshop.exception.UserNotFoundException;
 import pl.skefb.springshop.registration.token.ConfirmationToken;
 import pl.skefb.springshop.registration.token.ConfirmationTokenService;
@@ -13,7 +15,6 @@ import pl.skefb.springshop.registration.token.ConfirmationTokenService;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -32,7 +33,7 @@ public class ShopUserService implements UserDetailsService {
     public String signUpUser(ShopUser shopUser) {
         boolean userExists = shopUserRepository.existsByEmail(shopUser.getEmail());
         if (userExists) {
-            throw new IllegalStateException("Email already taken!");
+            throw new EmailAlreadyTakenException("Email already taken!");
         }
         String encodedPassword = bCryptPasswordEncoder.encode(shopUser.getPassword());
         shopUser.setPassword(encodedPassword);
@@ -70,6 +71,6 @@ public class ShopUserService implements UserDetailsService {
 
     public ShopUser findByEmail(String email) {
         return shopUserRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User with email " + email + " not found!"));
+                .orElseThrow(() -> new UserNotFoundException("User with email " + email + " not found!"));
     }
 }

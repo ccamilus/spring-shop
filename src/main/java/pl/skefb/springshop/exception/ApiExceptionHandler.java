@@ -32,4 +32,39 @@ public class ApiExceptionHandler {
                 HttpStatus.NOT_FOUND, ZonedDateTime.now(ZoneId.of("Europe/Warsaw")));
         return new ResponseEntity<>(apiException, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(value = EmailNotValidException.class)
+    public ResponseEntity<Object> exception(EmailNotValidException exception) {
+        ApiException apiException = new ApiException(exception.getMessage(),
+                HttpStatus.BAD_REQUEST, ZonedDateTime.now(ZoneId.of("Europe/Warsaw")));
+        return new ResponseEntity<>(apiException, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = TokenExpiredException.class)
+    public ResponseEntity<Object> exception(TokenExpiredException exception) {
+        ApiException apiException = new ApiException(exception.getMessage(),
+                HttpStatus.BAD_REQUEST, ZonedDateTime.now(ZoneId.of("Europe/Warsaw")));
+        return new ResponseEntity<>(apiException, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = EmailAlreadyConfirmedException.class)
+    public ResponseEntity<Object> exception(EmailAlreadyConfirmedException exception) {
+        ApiException apiException = new ApiException(exception.getMessage(),
+                HttpStatus.BAD_REQUEST, ZonedDateTime.now(ZoneId.of("Europe/Warsaw")));
+        return new ResponseEntity<>(apiException, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = EmailAlreadyTakenException.class)
+    public ResponseEntity<Object> exception(EmailAlreadyTakenException exception) {
+        ApiException apiException = new ApiException(exception.getMessage(),
+                HttpStatus.BAD_REQUEST, ZonedDateTime.now(ZoneId.of("Europe/Warsaw")));
+        return new ResponseEntity<>(apiException, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = UserNotExistException.class)
+    public ResponseEntity<Object> exception(UserNotExistException exception) {
+        ApiException apiException = new ApiException(exception.getMessage(),
+                HttpStatus.BAD_REQUEST, ZonedDateTime.now(ZoneId.of("Europe/Warsaw")));
+        return new ResponseEntity<>(apiException, HttpStatus.BAD_REQUEST);
+    }
 }

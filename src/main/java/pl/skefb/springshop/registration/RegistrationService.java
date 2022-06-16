@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.skefb.springshop.email.EmailSenderService;
+import pl.skefb.springshop.exception.EmailAlreadyConfirmedException;
+import pl.skefb.springshop.exception.EmailNotValidException;
+import pl.skefb.springshop.exception.TokenExpiredException;
 import pl.skefb.springshop.registration.token.ConfirmationToken;
 import pl.skefb.springshop.registration.token.ConfirmationTokenService;
 import pl.skefb.springshop.shopuser.ShopUser;
@@ -23,7 +26,7 @@ public class RegistrationService {
     public String register(RegistrationRequest request) {
         boolean isValidEmail = emailValidator.test(request.getEmail());
         if (!isValidEmail) {
-            throw new IllegalStateException("Email not valid!");
+            throw new EmailNotValidException("Email not valid!");
         }
         String token = shopUserService.signUpUser(
                 new ShopUser(
@@ -49,11 +52,11 @@ public class RegistrationService {
     public String confirmToken(String token) {
         ConfirmationToken confirmationToken = confirmationTokenService.getToken(token);
         if (confirmationToken.getConfirmedAt() != null) {
-            throw new IllegalStateException("Email already confirmed!");
+            throw new EmailAlreadyConfirmedException("Email already confirmed!");
         }
         Instant expiredAt = confirmationToken.getExpiresAt();
         if (expiredAt.isBefore(Instant.now())) {
-            throw new IllegalStateException("Token expired!");
+            throw new TokenExpiredException("Token expired!");
         }
         confirmationTokenService.setConfirmedAt(token);
         shopUserService.enableShopUser(confirmationToken.getShopUser().getEmail());
