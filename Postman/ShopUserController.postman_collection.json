@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "4a17be38-9724-4753-a0c8-da584167739f",
+		"name": "ShopUserController",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21520052"
+	},
+	"item": [
+		{
+			"name": "getUsers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5Ad3AucGwiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQURNSU4ifV0sImlhdCI6MTY1NTU1NjAzNiwiZXhwIjoxNjU2NzEyODAwfQ.wt4ZLUNUVXBj3OgCSXdYcsqTcSYUuLc32o-6ZpNhwyU",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/v1/shop-users",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"shop-users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUsersById",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5Ad3AucGwiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQURNSU4ifV0sImlhdCI6MTY1NTU1NjAzNiwiZXhwIjoxNjU2NzEyODAwfQ.wt4ZLUNUVXBj3OgCSXdYcsqTcSYUuLc32o-6ZpNhwyU",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/v1/shop-users/:shopUserId",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"shop-users",
+						":shopUserId"
+					],
+					"variable": [
+						{
+							"key": "shopUserId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getShopUserAdressesByShopUserId",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5Ad3AucGwiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQURNSU4ifV0sImlhdCI6MTY1NTU1NjAzNiwiZXhwIjoxNjU2NzEyODAwfQ.wt4ZLUNUVXBj3OgCSXdYcsqTcSYUuLc32o-6ZpNhwyU",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/v1/shop-users/:shopUserId/addresses",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"shop-users",
+						":shopUserId",
+						"addresses"
+					],
+					"variable": [
+						{
+							"key": "shopUserId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteUser",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5Ad3AucGwiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQURNSU4ifV0sImlhdCI6MTY1NTU1NjAzNiwiZXhwIjoxNjU2NzEyODAwfQ.wt4ZLUNUVXBj3OgCSXdYcsqTcSYUuLc32o-6ZpNhwyU",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/v1/shop-users/:shopUserId",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"shop-users",
+						":shopUserId"
+					],
+					"variable": [
+						{
+							"key": "shopUserId",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getShopUserPaymentsByShopUserId",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5Ad3AucGwiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQURNSU4ifV0sImlhdCI6MTY1NTU1NjAzNiwiZXhwIjoxNjU2NzEyODAwfQ.wt4ZLUNUVXBj3OgCSXdYcsqTcSYUuLc32o-6ZpNhwyU",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/v1/shop-users/:shopUserId/payments",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"shop-users",
+						":shopUserId",
+						"payments"
+					],
+					"variable": [
+						{
+							"key": "shopUserId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

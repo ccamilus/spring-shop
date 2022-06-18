@@ -1,0 +1,103 @@
+{
+	"info": {
+		"_postman_id": "d236d8b3-63e6-4f8e-87c6-0ce8e9999f2b",
+		"name": "RegistrationController",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21520052"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Jan\",\r\n    \"lastName\": \"Kowalski\",\r\n    \"email\": \"jkowalski@mail.com\",\r\n    \"password\": \"pass\",\r\n    \"telephone\": 789123456\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/registration",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"registration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "confirm",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "localhost:8080/registration/confirm?token=844ca9a4-3099-4752-b407-2630c62093fd",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"registration",
+						"confirm"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "844ca9a4-3099-4752-b407-2630c62093fd"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"jan@wp.pl\",\r\n    \"password\": \"pass\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
