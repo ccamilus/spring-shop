@@ -2,8 +2,11 @@ package pl.skefb.springshop.shoppingsession;
 
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import pl.skefb.springshop.response.ResponseHandler;
 import pl.skefb.springshop.shoppingsession.cartitem.CartItem;
 import pl.skefb.springshop.shoppingsession.cartitem.CartItemRequest;
 import pl.skefb.springshop.shoppingsession.cartitem.CartItemService;
@@ -33,9 +36,16 @@ public class ShoppingSessionController {
     }
 
     @PostMapping("cart-items/save")
-    private void addCartItemToCurrentShoppingSession(@RequestBody CartItemRequest cartItemRequest,
-                                                     Authentication authentication) {
-        cartItemService.addCartItemToCurrentShoppingSession(cartItemRequest, authentication);
+    private ResponseEntity<Object> addCartItemToCurrentShoppingSession(@RequestBody CartItemRequest cartItemRequest,
+                                                               Authentication authentication) {
+        if (cartItemService.existsByProductId(cartItemRequest.getProductId())) {
+            return ResponseHandler
+                    .generateResponse("Produkt znajduje się w koszyku!", HttpStatus.CONFLICT, null);
+        } else {
+            CartItem cartItem = cartItemService.addCartItemToCurrentShoppingSession(cartItemRequest, authentication);
+            return ResponseHandler
+                    .generateResponse("Produkt został dodany do koszyka!", HttpStatus.CREATED, cartItem);
+        }
     }
 
     @PutMapping("cart-items/change-quantity/{cartItemId}/{quantity}")

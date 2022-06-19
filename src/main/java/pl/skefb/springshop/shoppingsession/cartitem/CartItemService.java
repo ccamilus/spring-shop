@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.skefb.springshop.exception.UserNotFoundException;
 import pl.skefb.springshop.product.Product;
 import pl.skefb.springshop.product.ProductService;
 import pl.skefb.springshop.shoppingsession.ShoppingSession;
@@ -25,14 +26,14 @@ public class CartItemService {
     }
 
     @Transactional
-    public void addCartItemToCurrentShoppingSession(CartItemRequest cartItemRequest, Authentication authentication) {
+    public CartItem addCartItemToCurrentShoppingSession(CartItemRequest cartItemRequest, Authentication authentication) {
         ShoppingSession shoppingSession = shoppingSessionService.getCurrentlyActiveShoppingSession(authentication);
         Product product = productService.getProductById(cartItemRequest.getProductId());
         double total = shoppingSession.getTotal();
         total += product.getPrice() * cartItemRequest.getQuantity();
         shoppingSession.setTotal(total);
         CartItem cartItem = new CartItem(shoppingSession, product, cartItemRequest.getQuantity());
-        cartItemRepository.save(cartItem);
+        return cartItemRepository.save(cartItem);
     }
 
     @Transactional
@@ -51,5 +52,9 @@ public class CartItemService {
         double difference = cartItem.getQuantity() * cartItem.getProduct().getPrice();
         shoppingSessionService.updateTotalByDifference(authentication, difference);
         cartItemRepository.deleteCartItemById(cartItemId, shoppingSession.getId());
+    }
+
+    public boolean existsByProductId(Long id) {
+        return cartItemRepository.existsByProductId(id);
     }
 }
