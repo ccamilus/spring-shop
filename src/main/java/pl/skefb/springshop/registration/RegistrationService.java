@@ -42,9 +42,9 @@ public class RegistrationService {
         emailSenderService.sendEmail(
                 request.getEmail(),
                 "Weryfikacja konta",
-                "Dzień dobry " + request.getFirstName() + "!\n Oto Wwój link do weryfikacji konta:\n" +
+                "Dzień dobry " + request.getFirstName() + "!\n Oto Twój link do weryfikacji konta:\n" +
                         "http://localhost:8080/registration/confirm?token=" + token + "\n Link wygaśnie " +
-                        "za 2 tyognie od otrzymania wiadomości. Życzymy udanych zakupów w naszym sklepie!");
+                        "za 2 tygodnie od otrzymania wiadomości. Życzymy udanych zakupów w naszym sklepie!");
         return token;
     }
 

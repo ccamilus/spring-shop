@@ -1,0 +1,780 @@
+{
+	"info": {
+		"_postman_id": "1c00cc2f-9294-4bdc-b1bd-9d784068a2c8",
+		"name": "ShoppingSessionController",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21520052"
+	},
+	"item": [
+		{
+			"name": "getCurrentlyActiveShoppingSession",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "apikey"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5Ad3AucGwiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQURNSU4ifV0sImlhdCI6MTY1NTU1NjAzNiwiZXhwIjoxNjU2NzEyODAwfQ.wt4ZLUNUVXBj3OgCSXdYcsqTcSYUuLc32o-6ZpNhwyU",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "file",
+					"file": {}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/shopping-session",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"shopping-session"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getCurrentlyActiveShoppingSession",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5Ad3AucGwiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQURNSU4ifV0sImlhdCI6MTY1NTU1NjAzNiwiZXhwIjoxNjU2NzEyODAwfQ.wt4ZLUNUVXBj3OgCSXdYcsqTcSYUuLc32o-6ZpNhwyU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "file",
+							"file": {}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/shopping-session",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"shopping-session"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 18 Jun 2022 17:41:55 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 4,\n    \"shopUser\": {\n        \"id\": 1,\n        \"firstName\": \"Jan\",\n        \"lastName\": \"Kowalski\",\n        \"email\": \"jan@wp.pl\",\n        \"password\": \"$2a$10$8BqS8d6ERq.u4l1lqQCageD16DPQ4cg9E4GmOyMJzMwVAr4/deXu.\",\n        \"telephone\": 789456123,\n        \"createdAt\": \"2022-06-18T13:36:20.598405Z\",\n        \"shopUserRole\": \"ADMIN\",\n        \"enabled\": true,\n        \"accountNonLocked\": true,\n        \"username\": \"jan@wp.pl\",\n        \"accountNonExpired\": true,\n        \"credentialsNonExpired\": true,\n        \"authorities\": [\n            {\n                \"authority\": \"ADMIN\"\n            }\n        ]\n    },\n    \"total\": 0,\n    \"createdAt\": \"2022-06-18T17:41:55.328181400Z\",\n    \"expired\": false\n}"
+				}
+			]
+		},
+		{
+			"name": "getAllCartItems",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5Ad3AucGwiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQURNSU4ifV0sImlhdCI6MTY1NTU1NjAzNiwiZXhwIjoxNjU2NzEyODAwfQ.wt4ZLUNUVXBj3OgCSXdYcsqTcSYUuLc32o-6ZpNhwyU",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/v1/shopping-session/cart-items",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"shopping-session",
+						"cart-items"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getAllCartItems",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5Ad3AucGwiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQURNSU4ifV0sImlhdCI6MTY1NTU1NjAzNiwiZXhwIjoxNjU2NzEyODAwfQ.wt4ZLUNUVXBj3OgCSXdYcsqTcSYUuLc32o-6ZpNhwyU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/shopping-session/cart-items",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"shopping-session",
+								"cart-items"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 18 Jun 2022 14:03:12 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 2,\n        \"shoppingSession\": {\n            \"id\": 2,\n            \"shopUser\": {\n                \"id\": 1,\n                \"firstName\": \"Jan\",\n                \"lastName\": \"Kowalski\",\n                \"email\": \"jan@wp.pl\",\n                \"password\": \"$2a$10$8BqS8d6ERq.u4l1lqQCageD16DPQ4cg9E4GmOyMJzMwVAr4/deXu.\",\n                \"telephone\": 789456123,\n                \"createdAt\": \"2022-06-18T13:36:20.598405Z\",\n                \"shopUserRole\": \"ADMIN\",\n                \"enabled\": true,\n                \"accountNonLocked\": true,\n                \"username\": \"jan@wp.pl\",\n                \"accountNonExpired\": true,\n                \"credentialsNonExpired\": true,\n                \"authorities\": [\n                    {\n                        \"authority\": \"ADMIN\"\n                    }\n                ]\n            },\n            \"total\": 19545.8,\n            \"createdAt\": \"2022-06-18T13:41:29.263553Z\",\n            \"expired\": false\n        },\n        \"product\": {\n            \"id\": 1,\n            \"name\": \"Dell Latitude 3520\",\n            \"description\": \"Laptop z obudową bardzo wysokiej jakości, posiadający szereg zabezpieczeń, dzięki którym Twoje dane pozostaną bezpieczne. Jasny ekran 400 nit pozwoli na pracę w każdych warunkach a funkcja ExpressConnect zapewni optymalną łączność z punkami dostępu.\",\n            \"price\": 3909.16,\n            \"imageUrl\": \"https://images.morele.net/i1064/5948393_0_i1064.jpg\",\n            \"productInventory\": {\n                \"id\": 1,\n                \"quantity\": 10\n            },\n            \"productCategory\": {\n                \"id\": 1,\n                \"name\": \"elektronika\",\n                \"description\": \"bla bla bla\"\n            }\n        },\n        \"quantity\": 5\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "closeCurrentShoppingSession",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5Ad3AucGwiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQURNSU4ifV0sImlhdCI6MTY1NTU1NjAzNiwiZXhwIjoxNjU2NzEyODAwfQ.wt4ZLUNUVXBj3OgCSXdYcsqTcSYUuLc32o-6ZpNhwyU",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/v1/shopping-session/close",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"shopping-session",
+						"close"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "closeCurrentShoppingSession",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5Ad3AucGwiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQURNSU4ifV0sImlhdCI6MTY1NTU1NjAzNiwiZXhwIjoxNjU2NzEyODAwfQ.wt4ZLUNUVXBj3OgCSXdYcsqTcSYUuLc32o-6ZpNhwyU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/shopping-session/close",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"shopping-session",
+								"close"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 18 Jun 2022 17:42:16 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "addCartItemToCurrentShoppingSession",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5Ad3AucGwiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQURNSU4ifV0sImlhdCI6MTY1NTU1NjAzNiwiZXhwIjoxNjU2NzEyODAwfQ.wt4ZLUNUVXBj3OgCSXdYcsqTcSYUuLc32o-6ZpNhwyU",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": 1,\r\n    \"quantity\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/shopping-session/cart-items/save",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"shopping-session",
+						"cart-items",
+						"save"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "addCartItemToCurrentShoppingSession",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5Ad3AucGwiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQURNSU4ifV0sImlhdCI6MTY1NTU1NjAzNiwiZXhwIjoxNjU2NzEyODAwfQ.wt4ZLUNUVXBj3OgCSXdYcsqTcSYUuLc32o-6ZpNhwyU",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": 1,\r\n    \"quantity\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/shopping-session/cart-items/save",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"shopping-session",
+								"cart-items",
+								"save"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 18 Jun 2022 13:45:34 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "changeCartItemQuantity",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5Ad3AucGwiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQURNSU4ifV0sImlhdCI6MTY1NTU1NjAzNiwiZXhwIjoxNjU2NzEyODAwfQ.wt4ZLUNUVXBj3OgCSXdYcsqTcSYUuLc32o-6ZpNhwyU",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/v1/shopping-session/cart-items/change-quantity/:cartItem/:quantity",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"shopping-session",
+						"cart-items",
+						"change-quantity",
+						":cartItem",
+						":quantity"
+					],
+					"variable": [
+						{
+							"key": "cartItem",
+							"value": "1"
+						},
+						{
+							"key": "quantity",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "changeCartItemQuantity",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5Ad3AucGwiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQURNSU4ifV0sImlhdCI6MTY1NTU1NjAzNiwiZXhwIjoxNjU2NzEyODAwfQ.wt4ZLUNUVXBj3OgCSXdYcsqTcSYUuLc32o-6ZpNhwyU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/shopping-session/cart-items/change-quantity/:cartItem/:quantity",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"shopping-session",
+								"cart-items",
+								"change-quantity",
+								":cartItem",
+								":quantity"
+							],
+							"variable": [
+								{
+									"key": "cartItem",
+									"value": "2"
+								},
+								{
+									"key": "quantity",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 18 Jun 2022 17:45:06 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "deleteCartItemById",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5Ad3AucGwiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQURNSU4ifV0sImlhdCI6MTY1NTU1NjAzNiwiZXhwIjoxNjU2NzEyODAwfQ.wt4ZLUNUVXBj3OgCSXdYcsqTcSYUuLc32o-6ZpNhwyU",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/v1/shopping-session/cart-items/delete/:cartItem",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"shopping-session",
+						"cart-items",
+						"delete",
+						":cartItem"
+					],
+					"variable": [
+						{
+							"key": "cartItem",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "deleteCartItemById",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5Ad3AucGwiLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiQURNSU4ifV0sImlhdCI6MTY1NTU1NjAzNiwiZXhwIjoxNjU2NzEyODAwfQ.wt4ZLUNUVXBj3OgCSXdYcsqTcSYUuLc32o-6ZpNhwyU",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/shopping-session/cart-items/delete/:cartItem",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"shopping-session",
+								"cart-items",
+								"delete",
+								":cartItem"
+							],
+							"variable": [
+								{
+									"key": "cartItem",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 18 Jun 2022 13:45:22 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	]
+}
