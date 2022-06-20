@@ -21,10 +21,15 @@ public class CartItem {
     @OneToOne
     private Product product;
     private Integer quantity;
+    private double total;
 
-    public CartItem(ShoppingSession shoppingSession, Product product, Integer quantity) {
+    public CartItem(ShoppingSession shoppingSession,
+                    Product product,
+                    Integer quantity,
+                    double total) {
         this.shoppingSession = shoppingSession;
         this.product = product;
         this.quantity = quantity;
+        this.total = total;
     }
 }

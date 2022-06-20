@@ -26,13 +26,15 @@ public class CartItemService {
     }
 
     @Transactional
-    public CartItem addCartItemToCurrentShoppingSession(CartItemRequest cartItemRequest, Authentication authentication) {
+    public CartItem addCartItemToCurrentShoppingSession(CartItemRequest cartItemRequest,
+                                                        Authentication authentication) {
         ShoppingSession shoppingSession = shoppingSessionService.getCurrentlyActiveShoppingSession(authentication);
         Product product = productService.getProductById(cartItemRequest.getProductId());
         double total = shoppingSession.getTotal();
-        total += product.getPrice() * cartItemRequest.getQuantity();
+        double cartItemTotal = product.getPrice() * cartItemRequest.getQuantity();
+        total += cartItemTotal;
         shoppingSession.setTotal(total);
-        CartItem cartItem = new CartItem(shoppingSession, product, cartItemRequest.getQuantity());
+        CartItem cartItem = new CartItem(shoppingSession, product, cartItemRequest.getQuantity(), cartItemTotal);
         return cartItemRepository.save(cartItem);
     }
 
@@ -41,6 +43,7 @@ public class CartItemService {
         ShoppingSession shoppingSession = shoppingSessionService.getCurrentlyActiveShoppingSession(authentication);
         CartItem cartItem = cartItemRepository.getById(cartItemId);
         double difference = (cartItem.getQuantity() - quantity) * cartItem.getProduct().getPrice();
+        cartItem.setTotal(cartItem.getProduct().getPrice() * quantity);
         shoppingSessionService.updateTotalByDifference(authentication, difference);
         cartItemRepository.changeCartItemQuantity(cartItemId, quantity, shoppingSession.getId());
     }
