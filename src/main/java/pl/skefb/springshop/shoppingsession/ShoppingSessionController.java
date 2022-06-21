@@ -38,7 +38,7 @@ public class ShoppingSessionController {
             tmp.put("quantity", cartItem.getQuantity());
             items.add(tmp);
         }
-        data.put("cart-items", items);
+        data.put("cart_items", items);
         return ResponseHandler.generateResponse("Sukces", HttpStatus.OK, data);
     }
 
