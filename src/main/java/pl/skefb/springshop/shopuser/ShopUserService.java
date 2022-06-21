@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.skefb.springshop.exception.ApiRequestException;
 import pl.skefb.springshop.exception.EmailAlreadyConfirmedException;
 import pl.skefb.springshop.exception.EmailAlreadyTakenException;
 import pl.skefb.springshop.exception.UserNotFoundException;
@@ -33,7 +34,7 @@ public class ShopUserService implements UserDetailsService {
     public String signUpUser(ShopUser shopUser) {
         boolean userExists = shopUserRepository.existsByEmail(shopUser.getEmail());
         if (userExists) {
-            throw new EmailAlreadyTakenException("Email already taken!");
+            throw new ApiRequestException("Użytkownik z mailem " + shopUser.getEmail() + " już istnieje");
         }
         String encodedPassword = bCryptPasswordEncoder.encode(shopUser.getPassword());
         shopUser.setPassword(encodedPassword);
@@ -42,7 +43,7 @@ public class ShopUserService implements UserDetailsService {
         ConfirmationToken confirmationToken = new ConfirmationToken(
                 token,
                 Instant.now(),
-                Instant.now().plus(14, ChronoUnit.DAYS), shopUser
+                shopUser
         );
         confirmationTokenService.saveConfirmationToken(confirmationToken);
         return token;

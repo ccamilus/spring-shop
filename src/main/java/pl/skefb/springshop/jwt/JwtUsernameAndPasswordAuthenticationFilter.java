@@ -15,7 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @AllArgsConstructor
 public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -33,7 +37,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
                             authenticationRequest.getPassword());
             return authenticationManager.authenticate(authentication);
         } catch (IOException e) {
-            throw new RuntimeException("Authentication failed!");
+            throw new RuntimeException(e);
         }
     }
 
@@ -50,8 +54,29 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
                 .signWith(Keys.hmacShaKeyFor(key.getBytes())).compact();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(
-                "{\"authorizationToken\":\"Bearer " + token + "\"}"
-        );
+        Map<String, Object> map = new HashMap<>();
+        Map<String, String> tokenMap = new HashMap<>();
+        tokenMap.put("authorization-token", "Bearer " + token);
+        map.put("data", tokenMap);
+        map.put("message", "Sukces");
+        map.put("status", HttpServletResponse.SC_OK);
+        map.put("timestamp", ZonedDateTime.now(ZoneId.of("Europe/Warsaw")).toOffsetDateTime().toString());
+        String json = new ObjectMapper().writeValueAsString(map);
+        response.getWriter().write(json);
+    }
+
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request,
+                                              HttpServletResponse response,
+                                              AuthenticationException failed) throws IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        Map<String, Object> map = new HashMap<>();
+        map.put("message", "Podano zły login lub hasło");
+        map.put("status", HttpServletResponse.SC_UNAUTHORIZED);
+        map.put("timestamp", ZonedDateTime.now(ZoneId.of("Europe/Warsaw")).toOffsetDateTime().toString());
+        String json = new ObjectMapper().writeValueAsString(map);
+        response.getWriter().write(json);
     }
 }

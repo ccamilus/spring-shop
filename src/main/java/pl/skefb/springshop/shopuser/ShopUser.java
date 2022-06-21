@@ -23,7 +23,7 @@ public class ShopUser implements UserDetails {
     @Column(unique = true)
     private String email;
     private String password;
-    private Integer telephone;
+    private String telephone;
     private Instant createdAt;
     @Enumerated(EnumType.STRING)
     private ShopUserRole shopUserRole;
@@ -33,7 +33,7 @@ public class ShopUser implements UserDetails {
                     String lastName,
                     String email,
                     String password,
-                    Integer telephone,
+                    String telephone,
                     Instant createdAt,
                     ShopUserRole shopUserRole) {
         this.firstName = firstName;

@@ -2,6 +2,7 @@ package pl.skefb.springshop.registration.token;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.skefb.springshop.exception.ApiRequestException;
 
 import java.time.Instant;
 
@@ -15,7 +16,8 @@ public class ConfirmationTokenService {
     }
 
     public ConfirmationToken getToken(String token) {
-        return confirmationTokenRepository.findByToken(token);
+        return confirmationTokenRepository.findByToken(token)
+                .orElseThrow(() -> new ApiRequestException("Nie znaleziono tokenu " + token));
     }
 
     public int setConfirmedAt(String token) {

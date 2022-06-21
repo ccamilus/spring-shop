@@ -20,17 +20,14 @@ public class ConfirmationToken {
     private String token;
     @Column(nullable = false)
     private Instant createdAt;
-    @Column(nullable = false)
-    private Instant expiresAt;
     private Instant confirmedAt;
     @ManyToOne
     @JoinColumn(nullable = false, name = "shop_user_id")
     private ShopUser shopUser;
 
-    public ConfirmationToken(String token, Instant createdAt, Instant expiresAt, ShopUser shopUser) {
+    public ConfirmationToken(String token, Instant createdAt, ShopUser shopUser) {
         this.token = token;
         this.createdAt = createdAt;
-        this.expiresAt = expiresAt;
         this.shopUser = shopUser;
     }
 }

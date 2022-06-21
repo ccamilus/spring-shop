@@ -36,7 +36,7 @@ public class ShopUserConfig {
                     "Kowalski",
                     "jan@wp.pl",
                     bCryptPasswordEncoder.encode("pass"),
-                    789456123,
+                    "789456123",
                     Instant.now(),
                     ADMIN
             );
@@ -46,7 +46,7 @@ public class ShopUserConfig {
                     "Nowak",
                     "adam@wp.pl",
                     bCryptPasswordEncoder.encode("pass"),
-                    987654321,
+                    "987654321",
                     Instant.now(),
                     USER
             );
@@ -56,7 +56,7 @@ public class ShopUserConfig {
                     "Kowalik",
                     "marek@wp.pl",
                     bCryptPasswordEncoder.encode("pass"),
-                    420692137,
+                    "420692137",
                     Instant.now(),
                     USER
             );
