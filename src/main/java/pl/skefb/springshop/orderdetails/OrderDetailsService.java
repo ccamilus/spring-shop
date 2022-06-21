@@ -35,7 +35,7 @@ public class OrderDetailsService {
                 shopUserPaymentService.getShopUserPaymentById(orderDetailsRequest.getShopUserPaymentId()),
                 Instant.now());
         orderDetailsRepository.save(orderDetails);
-        List<CartItem> cartItems = cartItemService.getAllCartItemByShoppingSessionId(authentication);
+        List<CartItem> cartItems = cartItemService.getCartItemsByShoppingSessionId(authentication);
         for (CartItem cartItem : cartItems) {
             orderItemService.addOrderItem(new OrderItem(orderDetails, cartItem.getProduct(), cartItem.getQuantity()));
         }

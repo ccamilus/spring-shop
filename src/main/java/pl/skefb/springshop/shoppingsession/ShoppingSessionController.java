@@ -11,7 +11,10 @@ import pl.skefb.springshop.shoppingsession.cartitem.CartItem;
 import pl.skefb.springshop.shoppingsession.cartitem.CartItemRequest;
 import pl.skefb.springshop.shoppingsession.cartitem.CartItemService;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(path = "api/v1/shopping-session")
@@ -20,43 +23,55 @@ public class ShoppingSessionController {
     private final ShoppingSessionService shoppingSessionService;
     private final CartItemService cartItemService;
 
-    @GetMapping()
-    private ShoppingSession getCurrentlyActiveShoppingSession(Authentication authentication) {
-        return shoppingSessionService.getCurrentlyActiveShoppingSession(authentication);
-    }
-
-    @PutMapping("close")
-    private void closeCurrentShoppingSession(Authentication authentication) {
-        shoppingSessionService.closeCurrentShoppingSession(authentication);
-    }
-
     @GetMapping("cart-items")
-    private List<CartItem> getAllCartItems(Authentication authentication) {
-        return cartItemService.getAllCartItemByShoppingSessionId(authentication);
+    public ResponseEntity<Object> getCartItemsByShoppingSessionId(Authentication authentication) {
+        List<CartItem> cartItems = cartItemService.getCartItemsByShoppingSessionId(authentication);
+        ShoppingSession shoppingSession = shoppingSessionService.getCurrentlyActiveShoppingSession(authentication);
+        Map<String, Object> data = new HashMap<>();
+        data.put("total", shoppingSession.getTotal());
+        List<Map<String, Object>> items = new ArrayList<>();
+        for (CartItem cartItem : cartItems) {
+            Map<String, Object> tmp = new HashMap<>();
+            tmp.put("id", cartItem.getId());
+            tmp.put("product", cartItem.getProduct());
+            tmp.put("total", cartItem.getTotal());
+            tmp.put("quantity", cartItem.getQuantity());
+            items.add(tmp);
+        }
+        data.put("cart-items", items);
+        return ResponseHandler.generateResponse("Sukces", HttpStatus.OK, data);
     }
 
     @PostMapping("cart-items/save")
-    private ResponseEntity<Object> addCartItemToCurrentShoppingSession(@RequestBody CartItemRequest cartItemRequest,
-                                                               Authentication authentication) {
+    public ResponseEntity<Object> addCartItemToCurrentShoppingSession(@RequestBody CartItemRequest cartItemRequest,
+                                                                      Authentication authentication) {
         if (cartItemService.existsByProductId(cartItemRequest.getProductId())) {
             return ResponseHandler
-                    .generateResponse("Produkt znajduje się w koszyku!", HttpStatus.CONFLICT, null);
+                    .generateResponseWithoutData("Produkt znajduje się w koszyku", HttpStatus.CONFLICT);
         } else {
-            CartItem cartItem = cartItemService.addCartItemToCurrentShoppingSession(cartItemRequest, authentication);
+            cartItemService.addCartItemToCurrentShoppingSession(cartItemRequest, authentication);
             return ResponseHandler
-                    .generateResponse("Produkt został dodany do koszyka!", HttpStatus.CREATED, cartItem);
+                    .generateResponseWithoutData("Produkt został dodany do koszyka", HttpStatus.CREATED);
         }
     }
 
     @PutMapping("cart-items/change-quantity/{cartItemId}/{quantity}")
-    private void changeCartItemQuantity(@PathVariable("cartItemId") Long cartItemId,
-                                        @PathVariable("quantity") Integer quantity,
-                                        Authentication authentication) {
+    public ResponseEntity<Object> changeCartItemQuantity(@PathVariable("cartItemId") Long cartItemId,
+                                       @PathVariable("quantity") Integer quantity,
+                                       Authentication authentication) {
+        int quantityBeforeChange = cartItemService.getById(cartItemId).getQuantity();
         cartItemService.changeCartItemQuantity(cartItemId, quantity, authentication);
+        return ResponseHandler
+                .generateResponseWithoutData("Zmieniono ilość produktu z " + quantityBeforeChange + " na " +
+                        quantity + " dla produktu w koszyku o id " + cartItemId, HttpStatus.OK);
     }
 
     @DeleteMapping("cart-items/delete/{cartItemId}")
-    private void deleteCartItemById(@PathVariable("cartItemId") Long cartItemId, Authentication authentication) {
+    public ResponseEntity<Object> deleteCartItemById(@PathVariable("cartItemId") Long cartItemId,
+                                                     Authentication authentication) {
         cartItemService.deleteCartItemById(cartItemId, authentication);
+        return ResponseHandler
+                .generateResponseWithoutData("Usunięto produkt z koszyka o id " +
+                        cartItemId, HttpStatus.OK);
     }
 }
