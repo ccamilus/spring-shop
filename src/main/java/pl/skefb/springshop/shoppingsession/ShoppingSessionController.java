@@ -48,6 +48,9 @@ public class ShoppingSessionController {
         if (cartItemService.existsByProductId(cartItemRequest.getProductId())) {
             return ResponseHandler
                     .generateResponseWithoutData("Produkt znajduje się w koszyku", HttpStatus.CONFLICT);
+        } else if (cartItemRequest.getQuantity() < 1) {
+            return ResponseHandler
+                    .generateResponseWithoutData("Ilość musi być większa od 0", HttpStatus.BAD_REQUEST);
         } else {
             cartItemService.addCartItemToCurrentShoppingSession(cartItemRequest, authentication);
             return ResponseHandler
@@ -57,13 +60,18 @@ public class ShoppingSessionController {
 
     @PutMapping("cart-items/change-quantity/{cartItemId}/{quantity}")
     public ResponseEntity<Object> changeCartItemQuantity(@PathVariable("cartItemId") Long cartItemId,
-                                       @PathVariable("quantity") Integer quantity,
-                                       Authentication authentication) {
+                                                         @PathVariable("quantity") Integer quantity,
+                                                         Authentication authentication) {
         int quantityBeforeChange = cartItemService.getById(cartItemId).getQuantity();
-        cartItemService.changeCartItemQuantity(cartItemId, quantity, authentication);
-        return ResponseHandler
-                .generateResponseWithoutData("Zmieniono ilość produktu z " + quantityBeforeChange + " na " +
-                        quantity + " dla produktu w koszyku o id " + cartItemId, HttpStatus.OK);
+        if (quantity < 1) {
+            return ResponseHandler
+                    .generateResponseWithoutData("Ilość musi być większa od 0", HttpStatus.BAD_REQUEST);
+        } else {
+            cartItemService.changeCartItemQuantity(cartItemId, quantity, authentication);
+            return ResponseHandler
+                    .generateResponseWithoutData("Zmieniono ilość produktu z " + quantityBeforeChange + " na " +
+                            quantity + " dla produktu w koszyku o id " + cartItemId, HttpStatus.OK);
+        }
     }
 
     @DeleteMapping("cart-items/delete/{cartItemId}")
