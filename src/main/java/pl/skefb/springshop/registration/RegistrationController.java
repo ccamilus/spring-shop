@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.skefb.springshop.response.ResponseHandler;
 
+import java.net.URI;
+
 @RestController
 @RequestMapping(path = "/registration")
 @AllArgsConstructor
@@ -41,9 +43,8 @@ public class RegistrationController {
     }
 
     @GetMapping(path = "confirm")
-    public ResponseEntity<Object> confirm(@RequestParam("token") String token) {
+    public ResponseEntity<Void> confirm(@RequestParam("token") String token) {
         registrationService.confirmToken(token);
-        return ResponseHandler
-                .generateResponseWithoutData("Pomyślnie aktywowano konto", HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("http://localhost:8081")).build();
     }
 }

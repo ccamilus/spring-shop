@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
+@Table(name = "cart_item")
 @Data
 @NoArgsConstructor
 public class CartItem {
