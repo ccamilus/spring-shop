@@ -1,14 +1,12 @@
 package pl.skefb.springshop.shoppingsession.cartitem;
 
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.skefb.springshop.exception.ApiRequestException;
 import pl.skefb.springshop.product.Product;
 import pl.skefb.springshop.product.ProductService;
-import pl.skefb.springshop.response.ResponseHandler;
 import pl.skefb.springshop.shoppingsession.ShoppingSession;
 import pl.skefb.springshop.shoppingsession.ShoppingSessionService;
 
@@ -32,7 +30,8 @@ public class CartItemService {
     public void addCartItemToCurrentShoppingSession(CartItemRequest cartItemRequest, Authentication authentication) {
         ShoppingSession shoppingSession = shoppingSessionService.getCurrentlyActiveShoppingSession(authentication);
         Product product = productService.getProductById(cartItemRequest.getProductId());
-        if (existsByProductId(cartItemRequest.getProductId()) && existsByShoppingSession(shoppingSession)) {
+        if (existsByProductId(cartItemRequest.getProductId()) &&
+                existsInCurrentShoppingSession(product, authentication)) {
             throw new ApiRequestException("Produkt znajduje się w koszyku");
         }
         if (product.getProductInventory().getQuantity() < cartItemRequest.getQuantity()) {
@@ -74,8 +73,14 @@ public class CartItemService {
         return cartItemRepository.existsByProductId(id);
     }
 
-    public boolean existsByShoppingSession(ShoppingSession shoppingSession) {
-        return cartItemRepository.existsByShoppingSession(shoppingSession);
+    public boolean existsInCurrentShoppingSession(Product product, Authentication authentication) {
+        List<CartItem> cartItems = getCartItemsByShoppingSessionId(authentication);
+        for (CartItem cartItem: cartItems) {
+            if (cartItem.getProduct().getId().equals(product.getId())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public CartItem getById(Long id) {
