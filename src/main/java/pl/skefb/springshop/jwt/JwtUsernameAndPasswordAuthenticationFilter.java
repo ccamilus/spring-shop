@@ -56,7 +56,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
         response.setCharacterEncoding("UTF-8");
         Map<String, Object> map = new HashMap<>();
         Map<String, String> tokenMap = new HashMap<>();
-        tokenMap.put("authorization-token", "Bearer " + token);
+        tokenMap.put("authorization_token", "Bearer " + token);
         map.put("data", tokenMap);
         map.put("message", "Sukces");
         map.put("status", HttpServletResponse.SC_OK);
