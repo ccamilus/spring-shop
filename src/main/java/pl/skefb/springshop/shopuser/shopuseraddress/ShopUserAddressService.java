@@ -2,6 +2,7 @@ package pl.skefb.springshop.shopuser.shopuseraddress;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.skefb.springshop.exception.ApiRequestException;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class ShopUserAddressService {
     }
 
     public ShopUserAddress getShopUserAddressById(Long id) {
-        return shopUserAddressRepository.getById(id);
+        return shopUserAddressRepository.findById(id)
+                .orElseThrow(() -> new ApiRequestException("Nie znaleziono adresu o id " + id));
     }
 }

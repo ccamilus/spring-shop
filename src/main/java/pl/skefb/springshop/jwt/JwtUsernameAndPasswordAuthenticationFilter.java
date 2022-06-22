@@ -1,5 +1,6 @@
 package pl.skefb.springshop.jwt;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -9,6 +10,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import pl.skefb.springshop.exception.ApiRequestException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
@@ -29,9 +31,37 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
         try {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             UsernameAndPasswordAuthenticationRequest authenticationRequest =
-                    new ObjectMapper().readValue(request.getInputStream(),
+                    mapper.readValue(request.getInputStream(),
                             UsernameAndPasswordAuthenticationRequest.class);
+            if (authenticationRequest.getPassword() == null) {
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                Map<String, Object> map = new HashMap<>();
+                map.put("message", "Nie podano hasła");
+                map.put("status", HttpServletResponse.SC_BAD_REQUEST);
+                map.put("timestamp", ZonedDateTime
+                        .now(ZoneId.of("Europe/Warsaw")).toOffsetDateTime().toString());
+                String json = new ObjectMapper().writeValueAsString(map);
+                response.getWriter().write(json);
+                return null;
+            }
+            if (authenticationRequest.getUsername() == null) {
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                Map<String, Object> map = new HashMap<>();
+                map.put("message", "Nie podano emaila");
+                map.put("status", HttpServletResponse.SC_BAD_REQUEST);
+                map.put("timestamp", ZonedDateTime
+                        .now(ZoneId.of("Europe/Warsaw")).toOffsetDateTime().toString());
+                String json = new ObjectMapper().writeValueAsString(map);
+                response.getWriter().write(json);
+                return null;
+            }
             Authentication authentication =
                     new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(),
                             authenticationRequest.getPassword());
@@ -79,4 +109,6 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
         String json = new ObjectMapper().writeValueAsString(map);
         response.getWriter().write(json);
     }
+
+
 }

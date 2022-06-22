@@ -13,8 +13,7 @@ import java.time.ZonedDateTime;
 public class ApiExceptionHandler {
 
     @ExceptionHandler(value = {
-            ApiRequestException.class,
-            AuthenticationException.class
+            ApiRequestException.class
     })
     public ResponseEntity<Object> handleApiRequestException(ApiRequestException e) {
         ApiException apiException = new ApiException(

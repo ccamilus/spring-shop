@@ -43,6 +43,14 @@ public class ShoppingSessionController {
     @PostMapping("cart-items/save")
     public ResponseEntity<Object> addCartItemToCurrentShoppingSession(@RequestBody CartItemRequest cartItemRequest,
                                                                       Authentication authentication) {
+        if (cartItemRequest.getQuantity() == null) {
+            return ResponseHandler
+                    .generateResponseWithoutData("Nie podano ilości", HttpStatus.BAD_REQUEST);
+        }
+        if (cartItemRequest.getProductId() == null) {
+            return ResponseHandler
+                    .generateResponseWithoutData("Nie podano id produktu", HttpStatus.BAD_REQUEST);
+        }
         if (cartItemRequest.getQuantity() < 1) {
             return ResponseHandler
                     .generateResponseWithoutData("Ilość musi być większa od 0", HttpStatus.BAD_REQUEST);
