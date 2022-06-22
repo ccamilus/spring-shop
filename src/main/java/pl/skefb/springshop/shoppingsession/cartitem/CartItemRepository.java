@@ -26,6 +26,4 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
     void deleteCartItemById(Long cartItemId, Long shoppingSessionId);
 
     boolean existsByProductId(Long id);
-
-    boolean existsByShoppingSession(ShoppingSession shoppingSession);
 }

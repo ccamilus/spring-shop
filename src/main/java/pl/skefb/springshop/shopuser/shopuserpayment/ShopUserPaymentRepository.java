@@ -7,6 +7,6 @@ import java.util.List;
 
 @Repository
 public interface ShopUserPaymentRepository extends JpaRepository<ShopUserPayment, Long> {
-    List<ShopUserPayment> getShopUserPaymentsById(Long id);
+    List<ShopUserPayment> getShopUserPaymentsByShopUserEmail(String email);
 
 }

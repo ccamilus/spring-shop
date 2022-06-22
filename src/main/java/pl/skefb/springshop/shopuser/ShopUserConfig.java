@@ -35,60 +35,36 @@ public class ShopUserConfig {
             ShopUser jan = new ShopUser(
                     "Jan",
                     "Kowalski",
-                    "jan@wp.pl",
+                    "jan@springshop.skefb.pl",
                     bCryptPasswordEncoder.encode("pass"),
                     "789456123",
                     Instant.now(),
-                    ADMIN
+                    USER
             );
             jan.setEnabled(true);
             ShopUser adam = new ShopUser(
                     "Adam",
                     "Nowak",
-                    "adam@wp.pl",
+                    "adam@springshop.skefb.pl",
                     bCryptPasswordEncoder.encode("pass"),
                     "987654321",
                     Instant.now(),
-                    USER
+                    ADMIN
             );
             adam.setEnabled(true);
-            ShopUser marek = new ShopUser(
-                    "Marek",
-                    "Kowalik",
-                    "marek@wp.pl",
-                    bCryptPasswordEncoder.encode("pass"),
-                    "420692137",
-                    Instant.now(),
-                    USER
-            );
-            marek.setEnabled(true);
             ShopUserAddress janAddress1 = new ShopUserAddress(
                     jan,
                     "Szkolna 17",
                     "789456123",
-                    "Starosielce",
-                    "66-666",
-                    "Bombas"
-            );
-            ShopUserAddress janAddress2 = new ShopUserAddress(
-                    jan,
-                    "Rzemieślnicza 23",
-                    "123456789",
                     "Białystok",
-                    "77-888",
+                    "12-345",
                     "Polska"
             );
             ShopUserPayment janPayment1 = new ShopUserPayment(
                     jan,
                     "1234123412341234",
                     YearMonth.now().plusMonths(5),
-                    "666"
-            );
-            ShopUserPayment janPayment2 = new ShopUserPayment(
-                    jan,
-                    "7894789478947894",
-                    YearMonth.now().plusYears(2),
-                    "789"
+                    "123"
             );
 
             ShoppingSession shoppingSession = new ShoppingSession(
@@ -100,22 +76,11 @@ public class ShopUserConfig {
             shopUserRepository.saveAll(
                     List.of(
                             jan,
-                            adam,
-                            marek
+                            adam
                     )
             );
-            shopUserAddressRepository.saveAll(
-                    List.of(
-                            janAddress1,
-                            janAddress2
-                    )
-            );
-            shopUserPaymentRepository.saveAll(
-                    List.of(
-                            janPayment1,
-                            janPayment2
-                    )
-            );
+            shopUserAddressRepository.save(janAddress1);
+            shopUserPaymentRepository.save(janPayment1);
             shoppingSessionRepository.save(shoppingSession);
         };
     }

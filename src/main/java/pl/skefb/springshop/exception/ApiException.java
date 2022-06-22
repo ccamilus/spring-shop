@@ -1,7 +1,6 @@
 package pl.skefb.springshop.exception;
 
 import lombok.Data;
-import org.springframework.http.HttpStatus;
 
 import java.time.ZonedDateTime;
 

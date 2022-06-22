@@ -25,9 +25,8 @@ public class ProductConfig {
             ProductInventory productInventory4 = new ProductInventory(24);
             ProductInventory productInventory5 = new ProductInventory(105);
 
-            ProductCategory productCategory1 = new ProductCategory("elektronika", "bla bla bla");
-            ProductCategory productCategory2 = new ProductCategory("inna elektronika", "bla bla bla");
-            ProductCategory productCategory3 = new ProductCategory("fajna elektronika", "bla bla bla");
+            ProductCategory productCategory1 =
+                    new ProductCategory("Laptopy", "Laptopy/Notebooki/Ultrabooki");
 
             Product product1 = new Product(
                     "Dell Latitude 3520",
@@ -59,7 +58,7 @@ public class ProductConfig {
                     new BigDecimal("6499.00"),
                     "https://images.morele.net/full/9399112_0_f.jpg",
                     productInventory3,
-                    productCategory2
+                    productCategory1
             );
             Product product4 = new Product(
                     "HP 255 G8",
@@ -69,7 +68,7 @@ public class ProductConfig {
                     new BigDecimal("2199.00"),
                     "https://images.morele.net/i1064/9445121_0_i1064.jpg",
                     productInventory4,
-                    productCategory2
+                    productCategory1
             );
             Product product5 = new Product(
                     "Dell Alienware x17 R2",
@@ -81,7 +80,7 @@ public class ProductConfig {
                     new BigDecimal("39405.90"),
                     "https://images.morele.net/i1064/10340173_0_i1064.jpg",
                     productInventory5,
-                    productCategory3
+                    productCategory1
             );
             productInventoryRepository.saveAll(List.of(
                     productInventory1,
@@ -90,11 +89,7 @@ public class ProductConfig {
                     productInventory4,
                     productInventory5
             ));
-            productCategoryRepository.saveAll(List.of(
-                    productCategory1,
-                    productCategory2,
-                    productCategory3
-            ));
+            productCategoryRepository.save(productCategory1);
             productRepository.saveAll(List.of(
                     product1,
                     product2,

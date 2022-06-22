@@ -20,7 +20,7 @@ public class ConfirmationTokenService {
                 .orElseThrow(() -> new ApiRequestException("Nie znaleziono tokenu " + token));
     }
 
-    public int setConfirmedAt(String token) {
-        return confirmationTokenRepository.updateConfirmedAt(token, Instant.now());
+    public void setConfirmedAt(String token) {
+        confirmationTokenRepository.updateConfirmedAt(token, Instant.now());
     }
 }
