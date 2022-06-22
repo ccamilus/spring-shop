@@ -10,19 +10,19 @@ import java.util.Map;
 
 public class ResponseHandler {
     public static ResponseEntity<Object> generateResponse(String message, HttpStatus status, Object responseObj) {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         map.put("data", responseObj);
         map.put("message", message);
         map.put("status", status.value());
         map.put("timestamp", ZonedDateTime.now(ZoneId.of("Europe/Warsaw")));
-        return new ResponseEntity<Object>(map, status);
+        return new ResponseEntity<>(map, status);
     }
 
     public static ResponseEntity<Object> generateResponseWithoutData(String message, HttpStatus status) {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         map.put("message", message);
         map.put("status", status.value());
         map.put("timestamp", ZonedDateTime.now(ZoneId.of("Europe/Warsaw")));
-        return new ResponseEntity<Object>(map, status);
+        return new ResponseEntity<>(map, status);
     }
 }

@@ -17,7 +17,7 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
     @Transactional
     @Modifying
     @Query("UPDATE CartItem ci SET ci.quantity = ?2 WHERE ci.id = ?1 AND ci.shoppingSession.id = ?3")
-    int changeCartItemQuantity(Long cartItemId, Integer quantity, Long shoppingSessionId);
+    void changeCartItemQuantity(Long cartItemId, Integer quantity, Long shoppingSessionId);
 
     @Transactional
     @Modifying

@@ -18,10 +18,10 @@ public interface ShoppingSessionRepository extends JpaRepository<ShoppingSession
     @Transactional
     @Modifying
     @Query("UPDATE ShoppingSession ss SET ss.isExpired = TRUE WHERE ss.id = ?1")
-    int closeCurrentShoppingSession(Long shoppingSessionId);
+    void closeCurrentShoppingSession(Long shoppingSessionId);
 
     @Transactional
     @Modifying
     @Query("UPDATE ShoppingSession ss SET ss.total = ?2 WHERE ss.id = ?1")
-    int updateTotal(Long shoppingSessionId, BigDecimal total);
+    void updateTotal(Long shoppingSessionId, BigDecimal total);
 }
