@@ -1,12 +1,14 @@
 package pl.skefb.springshop.shoppingsession.cartitem;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.skefb.springshop.exception.ApiRequestException;
 import pl.skefb.springshop.product.Product;
 import pl.skefb.springshop.product.ProductService;
+import pl.skefb.springshop.response.ResponseHandler;
 import pl.skefb.springshop.shoppingsession.ShoppingSession;
 import pl.skefb.springshop.shoppingsession.ShoppingSessionService;
 
@@ -30,6 +32,9 @@ public class CartItemService {
     public void addCartItemToCurrentShoppingSession(CartItemRequest cartItemRequest, Authentication authentication) {
         ShoppingSession shoppingSession = shoppingSessionService.getCurrentlyActiveShoppingSession(authentication);
         Product product = productService.getProductById(cartItemRequest.getProductId());
+        if (existsByProductId(cartItemRequest.getProductId()) && existsByShoppingSession(shoppingSession)) {
+            throw new ApiRequestException("Produkt znajduje się w koszyku");
+        }
         if (product.getProductInventory().getQuantity() < cartItemRequest.getQuantity()) {
             throw new ApiRequestException("Nie wystarczająca ilość produktu w magazynie. Aktualna ilość " +
                     product.getProductInventory().getQuantity() + ", żądana ilość " + cartItemRequest.getQuantity());
@@ -67,6 +72,10 @@ public class CartItemService {
 
     public boolean existsByProductId(Long id) {
         return cartItemRepository.existsByProductId(id);
+    }
+
+    public boolean existsByShoppingSession(ShoppingSession shoppingSession) {
+        return cartItemRepository.existsByShoppingSession(shoppingSession);
     }
 
     public CartItem getById(Long id) {

@@ -43,10 +43,7 @@ public class ShoppingSessionController {
     @PostMapping("cart-items/save")
     public ResponseEntity<Object> addCartItemToCurrentShoppingSession(@RequestBody CartItemRequest cartItemRequest,
                                                                       Authentication authentication) {
-        if (cartItemService.existsByProductId(cartItemRequest.getProductId())) {
-            return ResponseHandler
-                    .generateResponseWithoutData("Produkt znajduje się w koszyku", HttpStatus.CONFLICT);
-        } else if (cartItemRequest.getQuantity() < 1) {
+        if (cartItemRequest.getQuantity() < 1) {
             return ResponseHandler
                     .generateResponseWithoutData("Ilość musi być większa od 0", HttpStatus.BAD_REQUEST);
         } else {

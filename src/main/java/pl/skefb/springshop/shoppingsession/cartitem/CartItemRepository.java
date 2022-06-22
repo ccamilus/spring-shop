@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import pl.skefb.springshop.shoppingsession.ShoppingSession;
 
 import java.util.List;
 
@@ -25,4 +26,6 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
     void deleteCartItemById(Long cartItemId, Long shoppingSessionId);
 
     boolean existsByProductId(Long id);
+
+    boolean existsByShoppingSession(ShoppingSession shoppingSession);
 }
