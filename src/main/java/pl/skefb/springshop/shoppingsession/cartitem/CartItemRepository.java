@@ -10,6 +10,8 @@ import java.util.List;
 
 @Repository
 public interface CartItemRepository extends JpaRepository<CartItem, Long> {
+    @Transactional
+    @Query("SELECT ci FROM CartItem ci WHERE ci.shoppingSession.id = ?1 ORDER BY ci.id")
     List<CartItem> getCartItemsByShoppingSessionId(Long shoppingSessionId);
 
     @Transactional

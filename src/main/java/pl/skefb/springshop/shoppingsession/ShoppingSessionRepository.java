@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Repository
@@ -22,5 +23,5 @@ public interface ShoppingSessionRepository extends JpaRepository<ShoppingSession
     @Transactional
     @Modifying
     @Query("UPDATE ShoppingSession ss SET ss.total = ?2 WHERE ss.id = ?1")
-    int updateTotal(Long shoppingSessionId, Double total);
+    int updateTotal(Long shoppingSessionId, BigDecimal total);
 }

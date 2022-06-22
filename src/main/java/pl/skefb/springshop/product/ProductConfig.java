@@ -8,6 +8,7 @@ import pl.skefb.springshop.product.productcategory.ProductCategoryRepository;
 import pl.skefb.springshop.product.productinventory.ProductInventory;
 import pl.skefb.springshop.product.productinventory.ProductInventoryRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Configuration
@@ -33,7 +34,7 @@ public class ProductConfig {
                     "Laptop z obudową bardzo wysokiej jakości, posiadający szereg zabezpieczeń, dzięki" +
                             " którym Twoje dane pozostaną bezpieczne. Jasny ekran 400 nit pozwoli na pracę w każdych" +
                             " warunkach a funkcja ExpressConnect zapewni optymalną łączność z punkami dostępu.",
-                    3909.16,
+                    new BigDecimal("3909.16"),
                     "https://images.morele.net/i1064/5948393_0_i1064.jpg",
                     productInventory1,
                     productCategory1
@@ -43,7 +44,7 @@ public class ProductConfig {
                     "Laptop cechujący się dobrym stosunkiem jakości oraz wydajności do ceny ze względu" +
                             " na starannie dobrane podzespoły. Mała waga oraz długi czas pracy na baterii sprzyjają" +
                             " mobilnej pracy",
-                    1699,
+                    new BigDecimal("1699.00"),
                     "https://images.morele.net/i1064/5943337_0_i1064.jpg",
                     productInventory2,
                     productCategory1
@@ -55,7 +56,7 @@ public class ProductConfig {
                             " do tego, aby uwolnić prawdziwą wydajność podczas rozgrywek. Nowy laptop Katana GF66" +
                             " jest zbudowany z takim samym kunsztem, z jakim wykuwa się ostrza. Pracuj z optymalną" +
                             " wydajnością i zabłyśnij na polu bitwy.",
-                    6499,
+                    new BigDecimal("6499.00"),
                     "https://images.morele.net/full/9399112_0_f.jpg",
                     productInventory3,
                     productCategory2
@@ -65,7 +66,7 @@ public class ProductConfig {
                     "Laptop, który dzięki swojej smukłej i lekkiej konstrukcji oraz wydajnym podzespołom" +
                             " idealnie będzie się nadawał do pracy jak i nauki. Układ TPM 2.0 zabezpieczy Twoje" +
                             " dane, a karta WiFi 6 zapewni stabilne połączenie",
-                    2199,
+                    new BigDecimal("2199.00"),
                     "https://images.morele.net/i1064/9445121_0_i1064.jpg",
                     productInventory4,
                     productCategory2
@@ -77,7 +78,7 @@ public class ProductConfig {
                             " w momentach intensywnej wydajności. Technologia ta obejmuje technologię czterech" +
                             " wentylatorów, unikalne stany zasilania oraz Element 31 — ekskluzywny, galowo-silikonowy" +
                             " materiał interfejsu termicznego firmy Alienware.",
-                    39405.90,
+                    new BigDecimal("39405.90"),
                     "https://images.morele.net/i1064/10340173_0_i1064.jpg",
                     productInventory5,
                     productCategory3

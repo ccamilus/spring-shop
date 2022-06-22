@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import pl.skefb.springshop.shopuser.ShopUser;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.Instant;
 
 @Entity
@@ -18,11 +19,12 @@ public class ShoppingSession {
     private Long id;
     @ManyToOne
     private ShopUser shopUser;
-    private double total;
+    @Column(scale = 2)
+    private BigDecimal total;
     private Instant createdAt;
     boolean isExpired = false;
 
-    public ShoppingSession(ShopUser shopUser, double total, Instant createdAt) {
+    public ShoppingSession(ShopUser shopUser, BigDecimal total, Instant createdAt) {
         this.shopUser = shopUser;
         this.total = total;
         this.createdAt = createdAt;

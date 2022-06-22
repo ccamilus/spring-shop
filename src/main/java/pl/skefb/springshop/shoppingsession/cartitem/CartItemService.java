@@ -10,6 +10,7 @@ import pl.skefb.springshop.product.ProductService;
 import pl.skefb.springshop.shoppingsession.ShoppingSession;
 import pl.skefb.springshop.shoppingsession.ShoppingSessionService;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -33,9 +34,9 @@ public class CartItemService {
             throw new ApiRequestException("Nie wystarczająca ilość produktu w magazynie. Aktualna ilość " +
                     product.getProductInventory().getQuantity() + ", żądana ilość " + cartItemRequest.getQuantity());
         }
-        double total = shoppingSession.getTotal();
-        double cartItemTotal = product.getPrice() * cartItemRequest.getQuantity();
-        total += cartItemTotal;
+        BigDecimal total = shoppingSession.getTotal();
+        BigDecimal cartItemTotal = product.getPrice().multiply(BigDecimal.valueOf(cartItemRequest.getQuantity()));
+        total = total.add(cartItemTotal);
         shoppingSession.setTotal(total);
         CartItem cartItem = new CartItem(shoppingSession, product, cartItemRequest.getQuantity(), cartItemTotal);
         cartItemRepository.save(cartItem);
@@ -49,8 +50,8 @@ public class CartItemService {
             throw new ApiRequestException("Nie wystarczająca ilość produktu w magazynie. Aktualna ilość " +
                     cartItem.getProduct().getProductInventory().getQuantity() + ", żądana ilość " + quantity);
         }
-        double difference = (cartItem.getQuantity() - quantity) * cartItem.getProduct().getPrice();
-        cartItem.setTotal(cartItem.getProduct().getPrice() * quantity);
+        BigDecimal difference = cartItem.getProduct().getPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity() - quantity));
+        cartItem.setTotal(cartItem.getProduct().getPrice().multiply(BigDecimal.valueOf(quantity)));
         shoppingSessionService.updateTotalByDifference(authentication, difference);
         cartItemRepository.changeCartItemQuantity(cartItemId, quantity, shoppingSession.getId());
     }
@@ -59,7 +60,7 @@ public class CartItemService {
     public void deleteCartItemById(Long cartItemId, Authentication authentication) {
         ShoppingSession shoppingSession = shoppingSessionService.getCurrentlyActiveShoppingSession(authentication);
         CartItem cartItem = getById(cartItemId);
-        double difference = cartItem.getQuantity() * cartItem.getProduct().getPrice();
+        BigDecimal difference = cartItem.getProduct().getPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity()));
         shoppingSessionService.updateTotalByDifference(authentication, difference);
         cartItemRepository.deleteCartItemById(cartItemId, shoppingSession.getId());
     }

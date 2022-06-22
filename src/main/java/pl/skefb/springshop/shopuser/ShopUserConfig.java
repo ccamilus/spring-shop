@@ -13,6 +13,7 @@ import pl.skefb.springshop.shopuser.shopuseraddress.ShopUserAddressRepository;
 import pl.skefb.springshop.shopuser.shopuserpayment.ShopUserPayment;
 import pl.skefb.springshop.shopuser.shopuserpayment.ShopUserPaymentRepository;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.YearMonth;
 import java.util.List;
@@ -92,7 +93,7 @@ public class ShopUserConfig {
 
             ShoppingSession shoppingSession = new ShoppingSession(
                     jan,
-                    0,
+                    new BigDecimal("0.00"),
                     Instant.now()
             );
 

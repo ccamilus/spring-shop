@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.skefb.springshop.shopuser.ShopUser;
 import pl.skefb.springshop.shopuser.ShopUserService;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Optional;
 
@@ -25,7 +26,7 @@ public class ShoppingSessionService {
         if (currentShoppingSession.isPresent()) {
             return currentShoppingSession.get();
         } else {
-            ShoppingSession shoppingSession = new ShoppingSession(shopUser, 0, Instant.now());
+            ShoppingSession shoppingSession = new ShoppingSession(shopUser, new BigDecimal("0.00"), Instant.now());
             shoppingSessionRepository.save(shoppingSession);
             return shoppingSession;
         }
@@ -37,8 +38,8 @@ public class ShoppingSessionService {
         shoppingSessionRepository.closeCurrentShoppingSession(shoppingSession.getId());
     }
 
-    public void updateTotalByDifference(Authentication authentication, Double difference) {
+    public void updateTotalByDifference(Authentication authentication, BigDecimal difference) {
         ShoppingSession shoppingSession = getCurrentlyActiveShoppingSession(authentication);
-        shoppingSessionRepository.updateTotal(shoppingSession.getId(), shoppingSession.getTotal() - difference);
+        shoppingSessionRepository.updateTotal(shoppingSession.getId(), shoppingSession.getTotal().subtract(difference));
     }
 }

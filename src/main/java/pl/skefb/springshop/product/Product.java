@@ -5,6 +5,7 @@ import pl.skefb.springshop.product.productcategory.ProductCategory;
 import pl.skefb.springshop.product.productinventory.ProductInventory;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 
 @Data
@@ -19,7 +20,7 @@ public class Product {
     @Column(columnDefinition = "TEXT")
     private String description;
     @Column(scale = 2)
-    private double price;
+    private BigDecimal price;
     private String imageUrl;
     @OneToOne
     private ProductInventory productInventory;
@@ -28,7 +29,7 @@ public class Product {
 
     public Product(String name,
                    String description,
-                   double price,
+                   BigDecimal price,
                    String imageUrl,
                    ProductInventory productInventory,
                    ProductCategory productCategory) {

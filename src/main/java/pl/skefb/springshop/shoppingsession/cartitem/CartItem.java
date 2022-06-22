@@ -7,6 +7,7 @@ import pl.skefb.springshop.product.Product;
 import pl.skefb.springshop.shoppingsession.ShoppingSession;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Data
@@ -21,12 +22,13 @@ public class CartItem {
     @OneToOne
     private Product product;
     private Integer quantity;
-    private double total;
+    @Column(scale = 2)
+    private BigDecimal total;
 
     public CartItem(ShoppingSession shoppingSession,
                     Product product,
                     Integer quantity,
-                    double total) {
+                    BigDecimal total) {
         this.shoppingSession = shoppingSession;
         this.product = product;
         this.quantity = quantity;

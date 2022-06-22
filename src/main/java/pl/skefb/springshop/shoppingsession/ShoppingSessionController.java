@@ -11,10 +11,7 @@ import pl.skefb.springshop.shoppingsession.cartitem.CartItem;
 import pl.skefb.springshop.shoppingsession.cartitem.CartItemRequest;
 import pl.skefb.springshop.shoppingsession.cartitem.CartItemService;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping(path = "api/v1/shopping-session")
@@ -26,6 +23,7 @@ public class ShoppingSessionController {
     @GetMapping("cart-items")
     public ResponseEntity<Object> getCartItemsByShoppingSessionId(Authentication authentication) {
         List<CartItem> cartItems = cartItemService.getCartItemsByShoppingSessionId(authentication);
+
         ShoppingSession shoppingSession = shoppingSessionService.getCurrentlyActiveShoppingSession(authentication);
         Map<String, Object> data = new HashMap<>();
         data.put("total", shoppingSession.getTotal());

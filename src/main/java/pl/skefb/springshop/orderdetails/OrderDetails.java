@@ -6,6 +6,7 @@ import pl.skefb.springshop.shopuser.shopuseraddress.ShopUserAddress;
 import pl.skefb.springshop.shopuser.shopuserpayment.ShopUserPayment;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.Instant;
 
 @Entity
@@ -18,7 +19,7 @@ public class OrderDetails {
     private Long id;
     @OneToOne
     private ShopUser shopUser;
-    private double total;
+    private BigDecimal total;
     @OneToOne
     private ShopUserAddress shopUserAddress;
     @OneToOne
@@ -26,7 +27,7 @@ public class OrderDetails {
     private Instant createdAt;
 
     public OrderDetails(ShopUser shopUser,
-                        double total,
+                        BigDecimal total,
                         ShopUserAddress shopUserAddress,
                         ShopUserPayment shopUserPayment,
                         Instant createdAt) {
